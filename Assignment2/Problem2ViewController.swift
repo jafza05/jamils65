@@ -10,11 +10,14 @@ import UIKit
 
 class Problem2ViewController: UIViewController {
     
-    let height: Int = 9
-    let width: Int = 9
     
-    var beforeArray = [[Bool]](count: 9, repeatedValue: Array(count: 9, repeatedValue: false))
-    var afterArray = [[Bool]](count: 9, repeatedValue: Array(count: 9, repeatedValue: false))
+    var iterationCounter: Int = 0
+    
+    let height: Int = 10
+    let width: Int = 10
+    
+    var beforeArray = [[Bool]](count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
+    var afterArray = [[Bool]](count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +34,9 @@ class Problem2ViewController: UIViewController {
         }
         
         print(beforeArray)
-
-        // Do any additional setup after loading the view.
         
-    }
-    @IBAction func runPress(sender: AnyObject) {
-        
-
         var aliveCount = 0
-            
+        
         for h in 0..<height {
             for w in 0..<width {
                 if beforeArray[h][w] == true {
@@ -47,9 +44,15 @@ class Problem2ViewController: UIViewController {
                 }
             }
         }
-            
+        
         labelRun.text = "There are \(aliveCount) living cells."
         matrixLabel.text =  "\(beforeArray)"
+
+        // Do any additional setup after loading the view.
+        
+    }
+    @IBAction func runPress(sender: AnyObject) {
+        
         
         
     }
@@ -57,7 +60,8 @@ class Problem2ViewController: UIViewController {
 
 
     @IBAction func runIteration(sender: AnyObject) {
-        
+
+        iterationCounter += 1
         var aboveLine: Int = 0
         var belowLine: Int = 0
         var toLeft: Int = 0
@@ -66,18 +70,19 @@ class Problem2ViewController: UIViewController {
         var hNeighbors = [Int] (count: 3, repeatedValue: 0)
         
         
-//        for h in 0..<height {
-//            for w in 0..<width {
+        for h in 0..<height {
+            for w in 0..<width {
         
-        let h = 8
-        let w = 8
-        var neighborCount: Int = 0
+//        let h = 0  //hardcoding focus cell for testing, delete before final
+//            let w = 0  //hardcoding focus cell for testing, delete before final
+        
+                var neighborAliveCount: Int = 0
         
                 switch h {
                 case 0:
-                    aboveLine = height
+                    aboveLine = height - 1
                     belowLine = h + 1
-                case height:
+                case height-1:
                     aboveLine = h - 1
                     belowLine = 0
                 default:
@@ -87,9 +92,9 @@ class Problem2ViewController: UIViewController {
                 
                 switch w {
                 case 0:
-                    toLeft = width
+                    toLeft = width - 1
                     toRight = w + 1
-                case width:
+                case width-1:
                     toLeft = w - 1
                     toRight = 0
                 default:
@@ -100,31 +105,79 @@ class Problem2ViewController: UIViewController {
         
                 vNeighbors = [aboveLine, h, belowLine]
                 hNeighbors = [toLeft, w, toRight]
-                print("\(h) and \(w)")
-                print("Above \(aboveLine), Below \(belowLine), Left \(toLeft), Right \(toRight)")
-                print("\(vNeighbors)")
-                print("\(hNeighbors)")
         
-        for x in vNeighbors {
-            for y in hNeighbors {
-                print("\(x),\(y)")
-                if (x == h && y == w) {
+                var focusStatus: Bool = false //captures whether focus cell is alive or dead
+                var nextState: Bool = false //variable for whether cell will be alive or dead for next state
+        
+ //               print("Current focus cell is \(h) and \(w)")
+ //               print("\(vNeighbors)")
+ //               print("\(hNeighbors)")
+        
+                for x in vNeighbors {
+                    for y in hNeighbors {
 
-                }
-                else if beforeArray[x][y] == true {
-                    neighborCount += 1
-                }
-                print(beforeArray[x][y])
-               
-            }
+                        if (x == h && y == w) {
+                            focusStatus = beforeArray[x][y]
+                        }
+                           
+                        else if beforeArray[x][y] == true {
+                            neighborAliveCount += 1
+                        }
+                
+                        //print("\(x),\(y) is", beforeArray[x][y]) //delete this when deleting focus cell hardcode
+
+                    }
             
-        }
-                print("\(neighborCount)")
+                }
         
+        if focusStatus {
+            switch neighborAliveCount {
+            case 2,3:
+                // cell stays alive
+                nextState = true
+                
+            default:
+                // cell dies
+                nextState = false
             }
- //       }
+        }
+            
+        else {
+            switch neighborAliveCount {
+            case 3:
+                // cell becomes alive
+                nextState = true
+                
+            default:
+                // cell stays dead
+                nextState = false
+            }
+        }
         
-//    }
+        print("\(h),\(w) cell is \(focusStatus) and has \(neighborAliveCount) alive neighbors and will be \(nextState) in next iteration")
+        afterArray[h][w] = nextState
+    }
+    
+    
+    }
+        print(afterArray)
+        afterMatrixLabel.text = ("\(afterArray)")
+        
+        var aliveCount = 0
+        
+        for h in 0..<height {
+            for w in 0..<width {
+                if beforeArray[h][w] == true {
+                    aliveCount += 1
+                }
+            }
+        }
+        print("There are \(aliveCount) living cells after iteration \(iterationCounter)")
+        
+        beforeArray = afterArray
+        
+        
+}
     
     @IBOutlet weak var labelRun: UILabel!
 

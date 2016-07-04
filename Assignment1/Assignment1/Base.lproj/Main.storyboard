@@ -286,32 +286,32 @@
                                         </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="2aB-mn-gGE"/>
-                                                <exclude reference="bJc-DX-q0y"/>
-                                                <exclude reference="bsD-I5-S1y"/>
-                                                <exclude reference="fEe-s6-Lqh"/>
+                                                <exclude reference="EMK-em-Khc"/>
+                                                <exclude reference="v3R-O7-v9H"/>
                                                 <exclude reference="1Y4-EZ-CLq"/>
                                                 <exclude reference="8AV-3V-ooi"/>
                                                 <exclude reference="Vgs-9T-U35"/>
+                                                <exclude reference="2aB-mn-gGE"/>
+                                                <exclude reference="bJc-DX-q0y"/>
+                                                <exclude reference="bsD-I5-S1y"/>
                                                 <exclude reference="ADU-YN-C3n"/>
                                                 <exclude reference="TYi-Zb-Phr"/>
-                                                <exclude reference="EMK-em-Khc"/>
-                                                <exclude reference="v3R-O7-v9H"/>
+                                                <exclude reference="fEe-s6-Lqh"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=compact-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="2aB-mn-gGE"/>
-                                                <include reference="bJc-DX-q0y"/>
-                                                <include reference="bsD-I5-S1y"/>
-                                                <include reference="fEe-s6-Lqh"/>
+                                                <include reference="EMK-em-Khc"/>
+                                                <include reference="v3R-O7-v9H"/>
                                                 <include reference="1Y4-EZ-CLq"/>
                                                 <include reference="8AV-3V-ooi"/>
                                                 <include reference="Vgs-9T-U35"/>
+                                                <include reference="2aB-mn-gGE"/>
+                                                <include reference="bJc-DX-q0y"/>
+                                                <include reference="bsD-I5-S1y"/>
                                                 <include reference="ADU-YN-C3n"/>
                                                 <include reference="TYi-Zb-Phr"/>
-                                                <include reference="EMK-em-Khc"/>
-                                                <include reference="v3R-O7-v9H"/>
+                                                <include reference="fEe-s6-Lqh"/>
                                             </mask>
                                         </variation>
                                     </view>

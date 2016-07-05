@@ -21,7 +21,9 @@ class Problem2ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+ 
+        self.title = "Problem 2"
+        
         for h in 0..<height {
             for w in 0..<width {
                 if Int(arc4random_uniform(3)) == 1 {
@@ -175,8 +177,6 @@ class Problem2ViewController: UIViewController {
     @IBOutlet weak var labelRun: UILabel!
 
     @IBOutlet weak var matrixLabel: UILabel!
-    
-    @IBOutlet weak var afterMatrixLabel: UILabel!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

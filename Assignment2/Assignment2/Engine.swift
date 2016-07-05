@@ -18,8 +18,8 @@ func step(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
     var vNeighbors = [Int] (count: 3, repeatedValue: 0)     //matrix for the 3 vertical neighbor rows of the target cell
     var hNeighbors = [Int] (count: 3, repeatedValue: 0)     //matrix for the 3 horizontal neighbor rows of the target cell
     
-    var height: Int = beforeArray.count
-    var width: Int = beforeArray.count
+    let height: Int = beforeArray.count
+    let width: Int = beforeArray.count
 
 
     for h in 0..<height {
@@ -175,6 +175,63 @@ func neighbors(x: Int, y:Int) -> [(Int,Int)] {
 }
 
 
-
+func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
+    
+    var afterArray = [[Bool]](count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
+    var nextState: Bool = false
+    
+    let height: Int = beforeArray.count
+    let width: Int = beforeArray.count
+    
+    
+    for h in 0..<10 {
+        for w in 0..<10 {
+            
+            var neighborAliveCount: Int = 0     //counter for how many neighbor cells are alive
+            var targetStatus = beforeArray[h][w]
+            
+            for z in neighbors(h, y: w) {
+                if beforeArray[z.0][z.1] == true {
+                    neighborAliveCount += 1
+                }
+            }
+            
+            if targetStatus {                    //set of conditions if target cell is alive
+                switch neighborAliveCount {
+                case 2,3:                       // cell stays alive
+                    nextState = true
+                    
+                default:                        // cell dies
+                    nextState = false
+                }
+            }
+                
+            else {                              //conditions if target cell is not alive
+                switch neighborAliveCount {
+                case 3:                         // cell becomes alive
+                    nextState = true
+                    
+                default:                        // cell stays dead
+                    nextState = false
+                }
+            }
+            
+            afterArray[h][w] = nextState
+        }
+    }
+    
+    
+    var aliveCount = 0                      //variable for counting alive cells
+    
+    for h in 0..<height {                   //for loop counting alive cells
+        for w in 0..<width {
+            if afterArray[h][w] == true {
+                aliveCount += 1
+            }
+        }
+    }
+    
+    return (afterArray: afterArray, aliveCells: aliveCount)
+}
 
 

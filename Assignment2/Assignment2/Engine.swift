@@ -8,6 +8,8 @@
 
 import Foundation
 
+//step is called in Problem 3
+
 func step(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
     
     var afterArray = [[Bool]](count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
@@ -113,7 +115,7 @@ func step(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
 
 
 
-
+//neighbors is called in step2 (which is actually below this function) which is part of the Problem 4 requirement. This function outputs the neighboring cells of each target cell, which are then evaluated in the step2 function to determine if they area alive and the next state of the target cell
 
 func neighbors(x: Int, y:Int) -> [(Int,Int)] {
     let height = 10
@@ -168,12 +170,11 @@ func neighbors(x: Int, y:Int) -> [(Int,Int)] {
             }
         }
     }
-    
-    print("\(neighborArray)")
     return neighborArray
     
 }
 
+//step 2 is called in Problem 4
 
 func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
     

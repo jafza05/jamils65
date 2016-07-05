@@ -61,7 +61,9 @@ class Problem4ViewController: UIViewController {
     }
     
     @IBOutlet weak var lblAliveCells: UILabel!
+    
     @IBOutlet weak var lblMatrix: UILabel!
+    
     @IBAction func Iterate(sender: AnyObject) {
         lblMatrix.text = "\(step2(beforeArray).afterArray)"
         lblAliveCells.text = "There are \(step2(beforeArray).aliveCells) living cells."

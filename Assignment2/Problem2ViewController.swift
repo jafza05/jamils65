@@ -54,31 +54,28 @@ class Problem2ViewController: UIViewController {
     @IBAction func runPress(sender: AnyObject) {
         
         
-        
     }
     
-
-
     @IBAction func runIteration(sender: AnyObject) {
 
-        iterationCounter += 1
-        var aboveLine: Int = 0
-        var belowLine: Int = 0
-        var toLeft: Int = 0
-        var toRight: Int = 0
-        var vNeighbors = [Int] (count: 3, repeatedValue: 0)
-        var hNeighbors = [Int] (count: 3, repeatedValue: 0)
+        iterationCounter += 1       //count how many iterations have happened, mostly for referene
+        var aboveLine: Int = 0      //variable for the row number of the neighbors above target cell
+        var belowLine: Int = 0      //variable for the row number of the neighbors below target cell
+        var toLeft: Int = 0         //variable for the column number of the neighbors to the left of the target cell
+        var toRight: Int = 0        //variable for the row number of the neighbors to the right of the target cell
+        var vNeighbors = [Int] (count: 3, repeatedValue: 0)     //matrix for the 3 vertical neighbor rows
+        var hNeighbors = [Int] (count: 3, repeatedValue: 0)     //matrix for the 3 horizontal neighbor rows
         
         
         for h in 0..<height {
             for w in 0..<width {
         
-//        let h = 0  //hardcoding focus cell for testing, delete before final
-//            let w = 0  //hardcoding focus cell for testing, delete before final
+//        let h = 0  //hardcoding target cell for testing, delete before final
+//            let w = 0  //hardcoding target cell for testing, delete before final
         
-                var neighborAliveCount: Int = 0
+                var neighborAliveCount: Int = 0     //counter for how many neighbor cells are alive
         
-                switch h {
+                switch h {                          //switch statement to determine neighbor rows of target cell
                 case 0:
                     aboveLine = height - 1
                     belowLine = h + 1
@@ -90,7 +87,7 @@ class Problem2ViewController: UIViewController {
                     belowLine = h + 1
                 }
                 
-                switch w {
+                switch w {                          //switch statement to determine neighbor columns of target cell
                 case 0:
                     toLeft = width - 1
                     toRight = w + 1
@@ -106,12 +103,12 @@ class Problem2ViewController: UIViewController {
                 vNeighbors = [aboveLine, h, belowLine]
                 hNeighbors = [toLeft, w, toRight]
         
-                var focusStatus: Bool = false //captures whether focus cell is alive or dead
-                var nextState: Bool = false //variable for whether cell will be alive or dead for next state
+                var focusStatus: Bool = false   //variable for whether target cell is alive or dead in current state
+                var nextState: Bool = false     //variable for whether target cell will be alive or dead for next state
         
- //               print("Current focus cell is \(h) and \(w)")
- //               print("\(vNeighbors)")
- //               print("\(hNeighbors)")
+ //               print("Current focus cell is \(h) and \(w)")  //debugging reference
+ //               print("\(vNeighbors)")                        //debugging reference
+ //               print("\(hNeighbors)")                        //debugging reference
         
                 for x in vNeighbors {
                     for y in hNeighbors {
@@ -124,7 +121,7 @@ class Problem2ViewController: UIViewController {
                             neighborAliveCount += 1
                         }
                 
-                        //print("\(x),\(y) is", beforeArray[x][y]) //delete this when deleting focus cell hardcode
+                        //print("\(x),\(y) is", beforeArray[x][y]) //delete this when deleting target cell hardcode
 
                     }
             
@@ -132,24 +129,20 @@ class Problem2ViewController: UIViewController {
         
         if focusStatus {
             switch neighborAliveCount {
-            case 2,3:
-                // cell stays alive
+            case 2,3:                       // cell stays alive
                 nextState = true
                 
-            default:
-                // cell dies
+            default:                        // cell dies
                 nextState = false
             }
         }
             
         else {
             switch neighborAliveCount {
-            case 3:
-                // cell becomes alive
+            case 3:                         // cell becomes alive
                 nextState = true
                 
-            default:
-                // cell stays dead
+            default:                        // cell stays dead
                 nextState = false
             }
         }
@@ -161,20 +154,20 @@ class Problem2ViewController: UIViewController {
     
     }
         print(afterArray)
-        afterMatrixLabel.text = ("\(afterArray)")
+        matrixLabel.text = ("\(afterArray)")
         
-        var aliveCount = 0
+        var aliveCount = 0                  //variable for counting alive cells, should probably make this a function
         
         for h in 0..<height {
             for w in 0..<width {
-                if beforeArray[h][w] == true {
+                if afterArray[h][w] == true {
                     aliveCount += 1
                 }
             }
         }
-        print("There are \(aliveCount) living cells after iteration \(iterationCounter)")
+        labelRun.text = "There are \(aliveCount) living cells after iteration \(iterationCounter)"
         
-        beforeArray = afterArray
+        beforeArray = afterArray            // sets before state to after state in prep for next iteration
         
         
 }

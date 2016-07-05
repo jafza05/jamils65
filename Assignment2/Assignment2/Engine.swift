@@ -179,6 +179,7 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
     
     var afterArray = [[Bool]](count: 10, repeatedValue: Array(count: 10, repeatedValue: false))
     var nextState: Bool = false
+    var targetStatus = false
     
     let height: Int = beforeArray.count
     let width: Int = beforeArray.count
@@ -188,7 +189,7 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
         for w in 0..<10 {
             
             var neighborAliveCount: Int = 0     //counter for how many neighbor cells are alive
-            var targetStatus = beforeArray[h][w]
+            targetStatus = beforeArray[h][w]
             
             for z in neighbors(h, y: w) {
                 if beforeArray[z.0][z.1] == true {

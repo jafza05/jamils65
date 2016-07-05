@@ -60,6 +60,13 @@ class Problem4ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBOutlet weak var lblAliveCells: UILabel!
+    @IBOutlet weak var lblMatrix: UILabel!
+    @IBAction func Iterate(sender: AnyObject) {
+        lblMatrix.text = "\(step2(beforeArray).afterArray)"
+        lblAliveCells.text = "There are \(step2(beforeArray).aliveCells) living cells."
+        beforeArray = step2(beforeArray).afterArray
+    }
 
     /*
     // MARK: - Navigation

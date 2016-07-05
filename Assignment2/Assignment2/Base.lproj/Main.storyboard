@@ -253,6 +253,7 @@
                                 </constraints>
                                 <state key="normal" title="Iterate"/>
                                 <connections>
+                                    <action selector="Iterate:" destination="Ydo-YQ-mwh" eventType="touchUpInside" id="DwY-59-k3g"/>
                                     <action selector="iterate:" destination="lBA-iy-2dP" eventType="touchUpInside" id="H5z-Gd-sIx"/>
                                 </connections>
                             </button>
@@ -274,37 +275,26 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLI-ah-sd8">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="opA-gR-n9B" firstAttribute="centerX" secondItem="AEO-Ru-bId" secondAttribute="centerX" id="8LX-vd-fwB"/>
-                            <constraint firstItem="dLI-ah-sd8" firstAttribute="centerX" secondItem="AEO-Ru-bId" secondAttribute="centerX" id="9Hb-UH-QMU"/>
                             <constraint firstItem="pDT-JR-7UT" firstAttribute="top" secondItem="zE0-sN-6cQ" secondAttribute="bottom" constant="20" id="FhM-7O-7ZD"/>
                             <constraint firstItem="pDT-JR-7UT" firstAttribute="centerX" secondItem="AEO-Ru-bId" secondAttribute="centerX" id="OfB-Od-qzy"/>
                             <constraint firstItem="pDT-JR-7UT" firstAttribute="width" secondItem="AEO-Ru-bId" secondAttribute="width" multiplier="0.8" id="PFd-tD-Gp5"/>
                             <constraint firstItem="zE0-sN-6cQ" firstAttribute="centerX" secondItem="AEO-Ru-bId" secondAttribute="centerX" id="QFh-q2-98O"/>
-                            <constraint firstItem="ygM-wm-irU" firstAttribute="top" secondItem="dLI-ah-sd8" secondAttribute="bottom" id="SPf-W8-wYd"/>
                             <constraint firstItem="zE0-sN-6cQ" firstAttribute="top" secondItem="mY3-04-XWd" secondAttribute="bottom" constant="20" id="URb-gT-Eee"/>
-                            <constraint firstItem="dLI-ah-sd8" firstAttribute="top" secondItem="AEO-Ru-bId" secondAttribute="topMargin" id="WtQ-Ri-J21"/>
                             <constraint firstItem="mY3-04-XWd" firstAttribute="top" secondItem="lWS-6v-Ucz" secondAttribute="bottom" constant="30" id="aA6-u1-yhv"/>
-                            <constraint firstItem="dLI-ah-sd8" firstAttribute="leading" secondItem="AEO-Ru-bId" secondAttribute="leadingMargin" constant="-20" id="ab2-hd-vxu"/>
                             <constraint firstItem="zE0-sN-6cQ" firstAttribute="width" secondItem="AEO-Ru-bId" secondAttribute="width" multiplier="0.8" id="cRu-XK-cCo"/>
                             <constraint firstItem="ygM-wm-irU" firstAttribute="top" secondItem="opA-gR-n9B" secondAttribute="bottom" constant="50" id="coa-dl-TmU"/>
-                            <constraint firstItem="dLI-ah-sd8" firstAttribute="top" secondItem="AEO-Ru-bId" secondAttribute="topMargin" constant="20" id="dSk-jB-Qsp"/>
                             <constraint firstItem="mY3-04-XWd" firstAttribute="centerX" secondItem="AEO-Ru-bId" secondAttribute="centerX" id="fMe-9f-j75"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dLI-ah-sd8" secondAttribute="trailing" constant="-20" id="ggb-By-zHm"/>
                             <constraint firstItem="pDT-JR-7UT" firstAttribute="height" secondItem="AEO-Ru-bId" secondAttribute="height" multiplier="0.5" priority="750" id="lV7-nQ-v8n"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="dSk-jB-Qsp"/>
-                            </mask>
-                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="lblAliveCells" destination="zE0-sN-6cQ" id="fXJ-SV-BjS"/>
+                        <outlet property="lblMatrix" destination="pDT-JR-7UT" id="YWI-xD-zzo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YqF-eZ-Rbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -312,6 +302,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2bn-Cz-5cv"/>
+        <segue reference="G9h-au-Sp5"/>
     </inferredMetricsTieBreakers>
 </document>

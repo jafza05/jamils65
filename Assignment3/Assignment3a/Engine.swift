@@ -69,10 +69,11 @@ func neighbors(x: Int, y:Int) -> [(Int,Int)] {
 
 //step 2 is called in Problem 4
 
-func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
+func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, grid: [[ViewController.CellState]]) {
     
     var afterArray = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
     var nextState: Bool = false
+    var tempGrid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue:ViewController.CellState.empty))
     var targetStatus = false
     
     let height: Int = beforeArray.count
@@ -91,13 +92,17 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
                 }
             }
             
+            //the follow switch has been appended to also create the grid which is used for drawing the visual grid and their respective cell colors based on the previous state condition. I used the tempGrid and later set the grid to tempGrid, due to issues with calling the GridView.grid directly
+            
             if targetStatus {                    //set of conditions if target cell is alive
                 switch neighborAliveCount {
                 case 2,3:                       // cell stays alive
                     nextState = true
+                    tempGrid[h][w] = ViewController.CellState.living
                     
                 default:                        // cell dies
                     nextState = false
+                    tempGrid[h][w] = ViewController.CellState.died
                 }
             }
                 
@@ -105,9 +110,11 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
                 switch neighborAliveCount {
                 case 3:                         // cell becomes alive
                     nextState = true
+                    tempGrid[h][w] = ViewController.CellState.born
                     
                 default:                        // cell stays dead
                     nextState = false
+                    tempGrid[h][w] = ViewController.CellState.empty
                 }
             }
             
@@ -126,7 +133,7 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int) {
         }
     }
     
-    return (afterArray: afterArray, aliveCells: aliveCount)
+    return (afterArray: afterArray, aliveCells: aliveCount, grid: tempGrid)
 }
 
 

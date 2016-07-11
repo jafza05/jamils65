@@ -18,18 +18,18 @@ class ViewController: UIViewController {
     var beforeArray = [[Bool]](count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
     var afterArray = [[Bool]](count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
     
+    var grid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: ViewController.CellState.empty))
     
+    var touchPoints = [UITouch : [CGPoint]]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     
-          }
-    
-    
-    func initialArray() -> [[Bool]] {
-        for h in 0..<height {
+        
+
+        for h in 0..<height {               //initialize first state of the array
             for w in 0..<width {
                 if Int(arc4random_uniform(3)) == 1 {
                     beforeArray [h][w] = true
@@ -41,26 +41,22 @@ class ViewController: UIViewController {
         }
 
         print(beforeArray)
-        return(beforeArray)
+
     }
-    
   
+    @IBAction func btnIterate(sender: AnyObject) {
+        
+        
+        beforeArray = step2(beforeArray).afterArray     //reiterate the cells
+//        GridView.grid = step2(beforeArray).grid         //set the grid for display to the grid outputs generated in the step2 function in the engine
+        print(beforeArray)                              //print for reference
+        print(step2(beforeArray).grid)                  //print for reference
+//        GridView.setNeedsDisplayInRect()                //print for reference
+        
+    }
 
     enum CellState: String {
-        case living
-        case died
-        case born
-        case empty
-        
-        
-        func colorSet() -> UIColor {
-            switch self {
-            case .living:
-                return UIColor.blackColor()
-            default:
-                return UIColor.greenColor()
-            }
-        }
+        case living, died, born, empty
         
         func description() -> String {
             switch self {
@@ -88,7 +84,33 @@ class ViewController: UIViewController {
         }
     }
     
-
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
+            toggleTouchPoint(touch) //capture beginning touch points
+        }
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches {
+            toggleTouchPoint(touch) //capture continued touch points
+        }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        processTouches()            //after touching is complete, call function to toggle touched cells
+    }
+ 
+    func toggleTouchPoint(touch: UITouch) {
+//        let position: CGPoint = touch.locationInView(ViewController)
+//        self.touchPoints[touch].append(position)    //store touched points into an array for toggle processing in processTouches
+        
+    }
+    
+    func processTouches() {             //evaulate state of touched points and toggle via enum
+//        for tp in touchPoints {
+//            grid[tp.0,tp.1].toggle() = grid[tp.0,tp.1]
+//        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

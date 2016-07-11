@@ -29,7 +29,7 @@ import UIKit
     }
 
     @IBInspectable var livingColor: UIColor = UIColor.greenColor()
-    @IBInspectable var emptyColor: UIColor = UIColor.grayColor()
+    @IBInspectable var emptyColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var bornColor: UIColor = UIColor.blueColor()
     @IBInspectable var diedColor: UIColor = UIColor.brownColor()
     @IBInspectable var gridColor: UIColor = UIColor.blackColor()
@@ -44,10 +44,9 @@ import UIKit
         let gridPath = UIBezierPath()
             
         gridPath.lineWidth = gridWidth
-        
+
         let heightSpacing: CGFloat = bounds.height / CGFloat(rows)  //determine horizontal grid line spacing
         let widthSpacing: CGFloat = bounds.width / CGFloat(cols)    //determine vertical gridline spacing
-
         
         
         for r in 0...rows {
@@ -78,6 +77,9 @@ import UIKit
 
         grid[2][2] = ViewController.CellState.living    //manual cell definition for testing
         grid[7][4] = ViewController.CellState.born      //manual cell definition for testing
+        grid[10][7] = ViewController.CellState.empty      //manual cell definition for testing
+        grid[12][16] = ViewController.CellState.died      //manual cell definition for testing
+        
         
         for r in 0..<rows{                              //draw circle (oval) in looped squares inside the grid
             for c in 0..<cols{
@@ -88,7 +90,7 @@ import UIKit
             
                 let path = UIBezierPath(ovalInRect: cellRect)
                 
-                switch grid[r][c] {                     //call grid array to determine which color each cell should be
+                switch grid[r][c] {    //call grid array to determine which color each cell should be
                     
                 case .living:
                     livingColor.set()
@@ -98,12 +100,13 @@ import UIKit
                     bornColor.set()
                 case .empty:
                     emptyColor.set()
+                    
                 }
- 
+                
                 path.fill()
+                
             }
         }
-        
     }
     
     

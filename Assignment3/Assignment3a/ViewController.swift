@@ -44,17 +44,22 @@ class ViewController: UIViewController {
 
     }
   
-    @IBAction func btnIterate(sender: AnyObject) {
+    @IBAction func bttnIterate(sender: AnyObject) {
         
         
         beforeArray = step2(beforeArray).afterArray     //reiterate the cells
-//        GridView.grid = step2(beforeArray).grid         //set the grid for display to the grid outputs generated in the step2 function in the engine
+//      GridView.grid = step2(beforeArray).grid         //set the grid for display to the grid outputs generated in the step2 function in the engine
+// this yeilds an error: instance member cannot be used on this type
+
         print(beforeArray)                              //print for reference
         print(step2(beforeArray).grid)                  //print for reference
-//        GridView.setNeedsDisplayInRect()                //print for reference
+//        GridView.setNeedsDisplay()                //print for reference
         
     }
 
+    @IBOutlet weak var cellGrid: GridView!
+    
+    
     enum CellState: String {
         case living, died, born, empty
         

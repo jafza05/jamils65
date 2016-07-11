@@ -94,6 +94,8 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, grid
             
             //the follow switch has been appended to also create the grid which is used for drawing the visual grid and their respective cell colors based on the previous state condition. I used the tempGrid and later set the grid to tempGrid, due to issues with calling the GridView.grid directly
             
+            //the return of the function has been updated to return the CellState grid
+            
             if targetStatus {                    //set of conditions if target cell is alive
                 switch neighborAliveCount {
                 case 2,3:                       // cell stays alive
@@ -117,6 +119,8 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, grid
                     tempGrid[h][w] = ViewController.CellState.empty
                 }
             }
+            
+// same dumb error            GridView.grid = tempGrid
             
             afterArray[h][w] = nextState
         }

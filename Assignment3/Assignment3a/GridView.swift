@@ -70,15 +70,8 @@ import UIKit
                 y: 0))
         }
         
-
-        
             gridColor.setStroke()
             gridPath.stroke()
-
-        grid[2][2] = ViewController.CellState.living    //manual cell definition for testing
-        grid[7][4] = ViewController.CellState.born      //manual cell definition for testing
-        grid[10][7] = ViewController.CellState.empty      //manual cell definition for testing
-        grid[12][16] = ViewController.CellState.died      //manual cell definition for testing
         
         
         for r in 0..<rows{                              //draw circle (oval) in looped squares inside the grid

@@ -8,11 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, ExampleDelegateProtocol {
+    
+    var example: ExampleProtocol!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        example = Example()
+        example.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +24,15 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func example(example: Example, didUpdateRows modelRows: UInt) {
+        rows.text = String(modelRows)
+    }
+    
+    @IBAction func increment(sender: AnyObject) {
+        example.rows += 10
+    }
+    
+    @IBOutlet weak var rows: UITextField!
 
 }
 

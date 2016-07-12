@@ -23,7 +23,7 @@
 		043AEA631D34312200E4BE16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		043AEA661D34312200E4BE16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		043AEA681D34312200E4BE16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		043AEA6E1D34395800E4BE16 /* ExampleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleProtocol.swift; sourceTree = "<group>"; };
+		043AEA6E1D34395800E4BE16 /* ExampleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExampleProtocol.swift; path = ../ExampleProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,6 @@
 		043AEA501D34312200E4BE16 = {
 			isa = PBXGroup;
 			children = (
-				043AEA6E1D34395800E4BE16 /* ExampleProtocol.swift */,
 				043AEA5B1D34312200E4BE16 /* Lecture6 */,
 				043AEA5A1D34312200E4BE16 /* Products */,
 			);
@@ -57,6 +56,7 @@
 		043AEA5B1D34312200E4BE16 /* Lecture6 */ = {
 			isa = PBXGroup;
 			children = (
+				043AEA6E1D34395800E4BE16 /* ExampleProtocol.swift */,
 				043AEA5C1D34312200E4BE16 /* AppDelegate.swift */,
 				043AEA5E1D34312200E4BE16 /* ViewController.swift */,
 				043AEA601D34312200E4BE16 /* Main.storyboard */,

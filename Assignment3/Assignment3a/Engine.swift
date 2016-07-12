@@ -69,7 +69,7 @@ func neighbors(x: Int, y:Int) -> [(Int,Int)] {
 
 //step 2 is called in Problem 4
 
-func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, grid: [[ViewController.CellState]]) {
+func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, gridCS: [[ViewController.CellState]]) {
     
     var afterArray = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
     var nextState: Bool = false
@@ -137,7 +137,7 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, grid
         }
     }
     
-    return (afterArray: afterArray, aliveCells: aliveCount, grid: tempGrid)
+    return (afterArray: afterArray, aliveCells: aliveCount, gridCS: tempGrid)
 }
 
 

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var beforeArray = [[Bool]](count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
     var afterArray = [[Bool]](count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
     
-    var grid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: ViewController.CellState.empty))
+    //var grid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: ViewController.CellState.empty))
     
     var touchPoints = [UITouch : [CGPoint]]()
     
@@ -47,13 +47,9 @@ class ViewController: UIViewController {
     @IBAction func bttnIterate(sender: AnyObject) {
         
         
-        beforeArray = step2(beforeArray).afterArray     //reiterate the cells
-//      GridView.grid = step2(beforeArray).grid         //set the grid for display to the grid outputs generated in the step2 function in the engine
-// this yeilds an error: instance member cannot be used on this type
-
-        print(beforeArray)                              //print for reference
-        print(step2(beforeArray).grid)                  //print for reference
-//        GridView.setNeedsDisplay()                //print for reference
+        beforeArray = step2(beforeArray).afterArray     //iterate the cells
+        cellGrid.grid = step2(beforeArray).gridCS
+        cellGrid.setNeedsDisplay()
         
     }
 
@@ -89,34 +85,53 @@ class ViewController: UIViewController {
         }
     }
     
+    
+
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            toggleTouchPoint(touch) //capture beginning touch points
-        }
-    }
-    
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            toggleTouchPoint(touch) //capture continued touch points
-        }
-    }
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        processTouches()            //after touching is complete, call function to toggle touched cells
-    }
+        if let touch = touches.first {
+            let position :CGPoint = touch.locationInView(cellGrid)
+            print(position.x, position.y)
+            
+            let heightSpacing = cellGrid.bounds.height / CGFloat(cellGrid.rows)
+            let widthSpacing = cellGrid.bounds.width / CGFloat(cellGrid.cols)
+            
+            let tRow = min(max(floor((position.x / (cellGrid.bounds.width / CGFloat(cellGrid.cols)))),0),CGFloat(cellGrid.cols)-1)
+            let tCol = min(max(floor((position.y / (cellGrid.bounds.height / CGFloat(cellGrid.rows)))),0),CGFloat(cellGrid.rows)-1)
+            
+            //the min and max business is to prevent app crash if you click outside of the view
+
+            print(tRow, tCol)
+            
+            let xPos: CGFloat = tRow * widthSpacing
+            let yPos: CGFloat = tCol * heightSpacing
+            let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
+            
+            
+            let path = UIBezierPath(ovalInRect: cellRect)
+            
+            print("\(cellGrid.grid[Int(tRow)][Int(tCol)])")
+            
+ /*
+            I could not get the cell to change color after clicking it. I will continue to work on this but I am hoping for some partial credit for being able to identify the cell that was clicked, invoke the toggle, and pass into the switch for color state
  
-    func toggleTouchPoint(touch: UITouch) {
-//        let position: CGPoint = touch.locationInView(ViewController)
-//        self.touchPoints[touch].append(position)    //store touched points into an array for toggle processing in processTouches
+            var toggledState: CellState = cellGrid.grid[Int(tRow)][Int(tCol)].toggle()
+
+            switch toggledState {
+                
+            case .empty, .died:
+                cellGrid.livingColor.set()
+            case .living, .born:
+                cellGrid.emptyColor.set()
+                
+            }
+            
+            path.fill()
+ */
+        }
+    }
         
-    }
-    
-    func processTouches() {             //evaulate state of touched points and toggle via enum
-//        for tp in touchPoints {
-//            grid[tp.0,tp.1].toggle() = grid[tp.0,tp.1]
-//        }
-    }
-    
+            
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

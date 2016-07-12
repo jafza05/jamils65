@@ -1,17 +1,16 @@
-//
-//  ExampleProtocol.swift
-//  Lecture6
-//
-//  Created by Jamil Afza on 7/11/16.
-//  Copyright © 2016 Jamil Afza. All rights reserved.
-//
+//: Playground - noun: a place where people can play
+
+import UIKit
+import Foundation
+
+var str = "Hello, playground"
+
 
 import Foundation
 
 protocol ExampleProtocol {
     var rows: UInt { get set }
     var cols: UInt { get set }
-    var delegate: ExampleDelegateProtocol? { get set }
     func step() -> [[Bool]]
 }
 
@@ -39,3 +38,9 @@ class ExampleDelegate: ExampleDelegateProtocol {
         print("Nothing")
     }
 }
+
+var ex = Example()
+var exd = ExampleDelegate()
+
+ex.delegate = exd
+ex.rows = 10

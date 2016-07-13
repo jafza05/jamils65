@@ -10,24 +10,24 @@ import UIKit
 
 @IBDesignable class GridView: UIView {
     
-    @IBInspectable var rows: Int = 20 {
+    @IBInspectable var rows: Int = 0 {
         didSet{
             if rows != oldValue {
-
-                grid = Array(count: rows, repeatedValue: Array(count: cols, repeatedValue: ViewController.CellState.empty))
+                grid = gridM()
                 print("rows changed")
             }
         }
     }
-    @IBInspectable var cols: Int = 20 {
+    
+    @IBInspectable var cols: Int = 0 {
         didSet{
             if cols != oldValue {
-                grid = Array(count: rows, repeatedValue: Array(count: cols, repeatedValue: ViewController.CellState.empty))
+                grid = gridM()
                 print("columns changed")
             }
         }
     }
-
+    
     @IBInspectable var livingColor: UIColor = UIColor.greenColor()
     @IBInspectable var emptyColor: UIColor = UIColor.lightGrayColor()
     @IBInspectable var bornColor: UIColor = UIColor.blueColor()
@@ -35,9 +35,11 @@ import UIKit
     @IBInspectable var gridColor: UIColor = UIColor.blackColor()
     @IBInspectable var gridWidth: CGFloat = 2.0
 
-
-    var grid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: ViewController.CellState.empty))
+    func gridM() -> [[ViewController.CellState]] {
+        return Array(count: self.rows, repeatedValue: Array(count: self.cols, repeatedValue: ViewController.CellState.empty))
+    }
     
+    var grid : [[ViewController.CellState]] = [[]]
     
     override func drawRect(rect: CGRect) {
         

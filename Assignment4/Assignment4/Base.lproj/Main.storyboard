@@ -18,41 +18,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rows" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5HZ-S1-FK8">
+                                <rect key="frame" x="225" y="171" width="41" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xhq-X2-LpK" userLabel="RowStepper">
+                                <rect key="frame" x="313" y="166.5" width="94" height="29"/>
+                                <connections>
+                                    <action selector="rowStepperDown:" destination="9pv-A4-QxB" eventType="valueChanged" id="bfu-Dz-Y06"/>
+                                    <action selector="rowStepperUp:" destination="9pv-A4-QxB" eventType="valueChanged" id="rIA-Er-NhK"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85q-6c-nrA" userLabel="RowValLabel">
+                                <rect key="frame" x="465" y="170" width="18" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Columns" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28M-Tt-YZm">
+                                <rect key="frame" x="198" y="230" width="67.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="IL9-Gv-jjb" userLabel="ColStepper">
+                                <rect key="frame" x="313" y="226" width="94" height="29"/>
+                                <connections>
+                                    <action selector="colStepperDown:" destination="9pv-A4-QxB" eventType="valueChanged" id="F94-M9-E1k"/>
+                                    <action selector="colStepperUp:" destination="9pv-A4-QxB" eventType="valueChanged" id="xAg-Gb-K9m"/>
+                                </connections>
+                            </stepper>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Htq-Sl-SW1">
+                                <rect key="frame" x="336" y="285" width="51" height="31"/>
+                                <connections>
+                                    <action selector="timedSwitch:" destination="9pv-A4-QxB" eventType="valueChanged" id="3J4-pe-Lbq"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refresh Freq" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1e-GC-hGS">
+                                <rect key="frame" x="168" y="350" width="98" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5.0499999999999998" minValue="0.10000000000000001" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="60h-mS-GnE">
-                                <rect key="frame" x="301" y="345.5" width="118" height="31"/>
+                                <rect key="frame" x="301" y="346" width="118" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="cVh-un-LCz"/>
                                 </constraints>
+                                <connections>
+                                    <action selector="frequencySlider:" destination="9pv-A4-QxB" eventType="valueChanged" id="8Ne-xH-cI7"/>
+                                </connections>
                             </slider>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Htq-Sl-SW1">
-                                <rect key="frame" x="336" y="284.5" width="51" height="31"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Columns" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28M-Tt-YZm">
-                                <rect key="frame" x="198" y="229.5" width="67.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="IL9-Gv-jjb" userLabel="ColStepper">
-                                <rect key="frame" x="313" y="225.5" width="94" height="29"/>
-                            </stepper>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="xhq-X2-LpK" userLabel="RowStepper">
-                                <rect key="frame" x="313" y="166.5" width="94" height="29"/>
-                            </stepper>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rows" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5HZ-S1-FK8">
-                                <rect key="frame" x="225" y="170.5" width="41" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timed Refresh" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BL-Oz-CkX">
                                 <rect key="frame" x="154" y="289.5" width="111.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refresh Freq" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1e-GC-hGS">
-                                <rect key="frame" x="168" y="350" width="98" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th2-Nh-IpC" userLabel="ColValLabel">
+                                <rect key="frame" x="465" y="230" width="18" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 hz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhG-ZV-aqZ" userLabel="FreqValLabel">
+                                <rect key="frame" x="457" y="350" width="33.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -65,21 +97,37 @@
                             <constraint firstItem="xhq-X2-LpK" firstAttribute="centerY" secondItem="5HZ-S1-FK8" secondAttribute="centerY" id="0pY-fo-HmA"/>
                             <constraint firstItem="60h-mS-GnE" firstAttribute="centerY" secondItem="p1e-GC-hGS" secondAttribute="centerY" id="3Ir-5f-Gg9"/>
                             <constraint firstItem="IL9-Gv-jjb" firstAttribute="top" secondItem="xhq-X2-LpK" secondAttribute="bottom" constant="30" id="4Ql-sh-lFf"/>
+                            <constraint firstItem="p1e-GC-hGS" firstAttribute="trailing" secondItem="3BL-Oz-CkX" secondAttribute="trailing" id="9hM-Tq-WnO"/>
+                            <constraint firstItem="HhG-ZV-aqZ" firstAttribute="leading" secondItem="60h-mS-GnE" secondAttribute="trailing" constant="40" id="A5T-1s-7PI"/>
                             <constraint firstItem="60h-mS-GnE" firstAttribute="top" secondItem="Htq-Sl-SW1" secondAttribute="bottom" constant="30" id="Ayq-dK-9U5"/>
                             <constraint firstItem="Htq-Sl-SW1" firstAttribute="leading" secondItem="3BL-Oz-CkX" secondAttribute="trailing" constant="70" id="Bli-XO-c4U"/>
                             <constraint firstItem="IL9-Gv-jjb" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" multiplier="0.8" id="EJD-vj-B1K"/>
+                            <constraint firstItem="85q-6c-nrA" firstAttribute="centerY" secondItem="xhq-X2-LpK" secondAttribute="centerY" id="HKS-ex-FyU"/>
                             <constraint firstItem="Htq-Sl-SW1" firstAttribute="top" secondItem="IL9-Gv-jjb" secondAttribute="bottom" constant="30" id="JOV-Jx-Zxi"/>
+                            <constraint firstItem="HhG-ZV-aqZ" firstAttribute="centerX" secondItem="85q-6c-nrA" secondAttribute="centerX" id="Kiu-aY-07G"/>
+                            <constraint firstItem="th2-Nh-IpC" firstAttribute="centerY" secondItem="IL9-Gv-jjb" secondAttribute="centerY" id="R37-aD-eLT"/>
                             <constraint firstItem="IL9-Gv-jjb" firstAttribute="centerX" secondItem="xhq-X2-LpK" secondAttribute="centerX" id="dG2-Bw-hmY"/>
                             <constraint firstItem="xhq-X2-LpK" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" multiplier="1.2" id="eri-fH-6fy"/>
                             <constraint firstItem="60h-mS-GnE" firstAttribute="centerX" secondItem="xhq-X2-LpK" secondAttribute="centerX" id="ka4-jp-R8b"/>
+                            <constraint firstItem="HhG-ZV-aqZ" firstAttribute="centerY" secondItem="60h-mS-GnE" secondAttribute="centerY" id="o4P-hf-54y"/>
                             <constraint firstItem="IL9-Gv-jjb" firstAttribute="centerY" secondItem="28M-Tt-YZm" secondAttribute="centerY" id="p3l-uq-f1R"/>
                             <constraint firstItem="Htq-Sl-SW1" firstAttribute="centerY" secondItem="3BL-Oz-CkX" secondAttribute="centerY" id="q2M-xJ-1qS"/>
                             <constraint firstItem="IL9-Gv-jjb" firstAttribute="top" secondItem="xhq-X2-LpK" secondAttribute="bottom" constant="30" id="qSB-Rv-V3N"/>
                             <constraint firstItem="IL9-Gv-jjb" firstAttribute="leading" secondItem="28M-Tt-YZm" secondAttribute="trailing" constant="47" id="qbf-Zb-YhZ"/>
-                            <constraint firstItem="60h-mS-GnE" firstAttribute="leading" secondItem="p1e-GC-hGS" secondAttribute="trailing" constant="37" id="vYV-vI-KXf"/>
+                            <constraint firstItem="th2-Nh-IpC" firstAttribute="centerX" secondItem="85q-6c-nrA" secondAttribute="centerX" id="t62-nd-9wb"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Instrumentation" image="Gears-50" selectedImage="Gears-50" id="acW-dT-cKf">
+                        <inset key="imageInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="FreqSliderOutlet" destination="60h-mS-GnE" id="k5c-0d-Qsp"/>
+                        <outlet property="FreqValLabel" destination="HhG-ZV-aqZ" id="QPV-jC-MWa"/>
+                        <outlet property="colStepperOutlet" destination="p3l-uq-f1R" id="ksg-Qw-eZA"/>
+                        <outlet property="colValLabel" destination="th2-Nh-IpC" id="SdH-3G-1AN"/>
+                        <outlet property="rowStepperOutlet" destination="xhq-X2-LpK" id="EQh-HA-5oo"/>
+                        <outlet property="rowValLabel" destination="85q-6c-nrA" id="Yp2-Ch-3nI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -101,25 +149,64 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="195" y="279" width="209.5" height="41.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t1U-Fd-yyP" customClass="GridView" customModule="Assignment4" customModuleProvider="target">
+                                <rect key="frame" x="75" y="75" width="450" height="450"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rows">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cols">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="livingColor">
+                                        <color key="value" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="bornColor">
+                                        <color key="value" red="0.01306150572" green="0.81969150639999999" blue="0.069770414850000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="diedColor">
+                                        <color key="value" red="0.75104303009999995" green="0.38012677099999997" blue="0.60218574700000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="gridColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="gridWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rQ-Xx-eyr">
+                                <rect key="frame" x="277.5" y="35" width="45" height="30"/>
+                                <state key="normal" title="Iterate"/>
+                                <connections>
+                                    <action selector="buttonIterate:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="qhJ-3N-PvZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="9rQ-Xx-eyr" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="KCP-0U-Rkb"/>
+                            <constraint firstItem="t1U-Fd-yyP" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="MUO-Lf-pwK"/>
+                            <constraint firstItem="t1U-Fd-yyP" firstAttribute="height" secondItem="QS5-Rx-YEW" secondAttribute="height" multiplier="0.75" id="QP6-qq-nqp"/>
                             <constraint firstItem="DUr-Jv-ie2" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="Sq5-4a-wtF"/>
+                            <constraint firstItem="t1U-Fd-yyP" firstAttribute="width" secondItem="QS5-Rx-YEW" secondAttribute="width" multiplier="0.75" id="TKy-Rg-F9t"/>
+                            <constraint firstItem="t1U-Fd-yyP" firstAttribute="top" secondItem="9rQ-Xx-eyr" secondAttribute="bottom" constant="10" id="b28-UK-XO4"/>
+                            <constraint firstItem="t1U-Fd-yyP" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="hi2-pM-xIT"/>
                             <constraint firstItem="DUr-Jv-ie2" firstAttribute="width" secondItem="QS5-Rx-YEW" secondAttribute="width" id="lT9-ek-2nU"/>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
                             <constraint firstItem="DUr-Jv-ie2" firstAttribute="height" secondItem="QS5-Rx-YEW" secondAttribute="height" id="t5k-fo-Iks"/>
                             <constraint firstItem="DUr-Jv-ie2" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="t9d-FU-CVg"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Simulation" image="Bacteria-50" id="cPa-gy-q4n">
+                        <inset key="imageInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="cellGrid" destination="t1U-Fd-yyP" id="jCO-e6-XOe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -141,6 +228,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EhD-oV-Zxr">
+                                <rect key="frame" x="279" y="160" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -150,7 +243,9 @@
                             <constraint firstItem="rZ6-Mk-mld" firstAttribute="centerY" secondItem="pgP-bc-hnS" secondAttribute="centerY" id="uAK-Jd-M7d"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="mhX-4U-rIp"/>
+                    <tabBarItem key="tabBarItem" title="Statistics" image="Mind Map-50" id="mhX-4U-rIp">
+                        <inset key="imageInsets" minX="7" minY="7" maxX="7" maxY="7"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WjB-cM-vyy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -178,7 +273,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="Bacteria-50" width="50" height="50"/>
+        <image name="Gears-50" width="50" height="50"/>
+        <image name="Mind Map-50" width="50" height="50"/>
     </resources>
 </document>

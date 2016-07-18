@@ -72,12 +72,12 @@
 				047D0C6B1D3A8D6800B04AAB /* Protocols.swift */,
 				0468ADC81D3BBA8100936162 /* Classes.swift */,
 				047D0C591D37D54F00B04AAB /* SimulationViewController.swift */,
-				0468ADC61D3ADF6500936162 /* GridView.swift */,
 				047D0C691D37D66600B04AAB /* StatisticsViewController.swift */,
-				047D0C6D1D3A8ED800B04AAB /* Engine.swift */,
 				047D0C5E1D37D54F00B04AAB /* Assets.xcassets */,
 				047D0C601D37D54F00B04AAB /* LaunchScreen.storyboard */,
 				047D0C631D37D54F00B04AAB /* Info.plist */,
+				047D0C6D1D3A8ED800B04AAB /* Engine.swift */,
+				0468ADC61D3ADF6500936162 /* GridView.swift */,
 			);
 			path = Assignment4;
 			sourceTree = "<group>";

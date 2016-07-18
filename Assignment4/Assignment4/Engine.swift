@@ -69,11 +69,11 @@ func neighbors(x: Int, y:Int) -> [(Int,Int)] {
 
 
 
-func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, gridCS: [[ViewController.CellState]]) {
+func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, gridCS: [[CellState]]) {
     
     var afterArray = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
     var nextState: Bool = false
-    var tempGrid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue:ViewController.CellState.empty))
+    var tempGrid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue:CellState.empty))
     var targetStatus = false
     
     let height: Int = beforeArray.count
@@ -100,11 +100,11 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, grid
                 switch neighborAliveCount {
                 case 2,3:                       // cell stays alive
                     nextState = true
-                    tempGrid[h][w] = ViewController.CellState.living
+                    tempGrid[h][w] = CellState.living
                     
                 default:                        // cell dies
                     nextState = false
-                    tempGrid[h][w] = ViewController.CellState.died
+                    tempGrid[h][w] = CellState.died
                 }
             }
                 
@@ -112,11 +112,11 @@ func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, grid
                 switch neighborAliveCount {
                 case 3:                         // cell becomes alive
                     nextState = true
-                    tempGrid[h][w] = ViewController.CellState.born
+                    tempGrid[h][w] = CellState.born
                     
                 default:                        // cell stays dead
                     nextState = false
-                    tempGrid[h][w] = ViewController.CellState.empty
+                    tempGrid[h][w] = CellState.empty
                 }
             }
             

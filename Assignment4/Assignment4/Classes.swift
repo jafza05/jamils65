@@ -25,17 +25,19 @@ class StandardEngine: EngineProtocol {
     var refreshTimer: NSTimer
     var rows: UInt
     var cols: UInt
+    var delegate: EngineProtocol?
     
-    required init(rows: UInt, cols: UInt) {
+    
+    init(rows: UInt, cols: UInt) {
         self.rows = rows
         self.cols = cols
     }
-    
-    func step2(beforeArray: [[Bool]]) -> (afterArray:[[Bool]], aliveCells: Int, gridCS: [[CellState]]) {
+
+    func step(beforeArray: [[Bool]]) -> (gridCS: [[CellState]]) {
         
-        var afterArray = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
+        var afterArray = Array(count: rows, repeatedValue: Array(count: cols, repeatedValue: false))
         var nextState: Bool = false
-        var tempGrid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: CellState.empty))
+        var tempGrid = Array(count: rows, repeatedValue: Array(count: cols, repeatedValue: CellState.empty))
         var targetStatus = false
         
         let height: Int = beforeArray.count
@@ -98,9 +100,40 @@ class StandardEngine: EngineProtocol {
             }
         }
         
-        return (afterArray: afterArray, aliveCells: aliveCount, gridCS: tempGrid)
+        return (gridCS: tempGrid)
     }
     
+    
+    private var freqTimer:NSTimer?
+    
+    var refreshInterval: NSTimeInterval = 0 {
+        didSet {
+            if refreshInterval != 0 {
+                if let freqTimer = freqTimer { freqTimer.invalidate() }
+                let sel = #selector(StandardEngine.t(_:)timerClock)
+                timer = NSTimer.scheduledTimerWithTimeInterval(refreshInterval,
+                                                               target: self,
+                                                               selector: sel,
+                                                               userInfo: "check fire",
+                                                               repeats: true)
+            }
+            
+            else if let freqTimer = freqTimer {
+                freqTimer.invalidate()
+                self.freqTimer = nil
+            }
+        }
+    }
+
+    
+    @objc func timerClock(timer:NSTimer) {
+        self.rows += 1
+        let center = NSNotificationCenter.defaultCenter()
+        let n = NSNotification(name: "TimerFire",
+                               object: nil,
+                               userInfo: nil)
+        center.postNotification(n)
+
     
 }
 
@@ -116,16 +149,17 @@ class Grid: GridProtocol {
     }
     var cols: UInt {
         get {
-        return 10
+            return 10
         }
     }
     
 
     
-    var gridArray: [[CellState]] = [[]]
+    private var gridArray: [[CellState]] = [[]]
     
-    func gridM() -> [[CellState]] {
-        return Array(count: Int(self.rows), repeatedValue: Array(count: Int(self.cols), repeatedValue: CellState.empty))
+    init (rows, cols) {
+        gridArray = Array(count: Int(rows), repeatedValue: Array(count: Int(cols), repeatedValue: CellState.empty))
+        }
     }
     
     
@@ -187,11 +221,10 @@ class Grid: GridProtocol {
         return neighborArray
     }
     
-    subscript(xSub: Int, ySub: Int) -> CellState {
+    subscript(xSub: Int, ySub: Int, grid: [[CellState]]) -> CellState {
         get {
-            return gridArray[xSub][ySub]
+            return grid[xSub][ySub]
         }
         
-    }
-    
 }
+

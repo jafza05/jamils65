@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0468ADC71D3ADF6500936162 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468ADC61D3ADF6500936162 /* GridView.swift */; };
-		0468ADC91D3BBA8100936162 /* Classes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468ADC81D3BBA8100936162 /* Classes.swift */; };
+		0468ADC91D3BBA8100936162 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468ADC81D3BBA8100936162 /* Grid.swift */; };
+		0468ADCB1D3DAD2200936162 /* StandardEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468ADCA1D3DAD2200936162 /* StandardEngine.swift */; };
+		0468ADCE1D3DAD9100936162 /* GridProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468ADCD1D3DAD9100936162 /* GridProtocol.swift */; };
+		0468ADD01D3DADBB00936162 /* EngineDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468ADCF1D3DADBB00936162 /* EngineDelegateProtocol.swift */; };
+		0468ADD21D3DADDA00936162 /* CellStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468ADD11D3DADDA00936162 /* CellStateEnum.swift */; };
 		047D0C561D37D54F00B04AAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047D0C551D37D54F00B04AAB /* AppDelegate.swift */; };
 		047D0C581D37D54F00B04AAB /* InstrumentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047D0C571D37D54F00B04AAB /* InstrumentationViewController.swift */; };
 		047D0C5A1D37D54F00B04AAB /* SimulationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047D0C591D37D54F00B04AAB /* SimulationViewController.swift */; };
@@ -16,13 +20,17 @@
 		047D0C5F1D37D54F00B04AAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 047D0C5E1D37D54F00B04AAB /* Assets.xcassets */; };
 		047D0C621D37D54F00B04AAB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 047D0C601D37D54F00B04AAB /* LaunchScreen.storyboard */; };
 		047D0C6A1D37D66600B04AAB /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047D0C691D37D66600B04AAB /* StatisticsViewController.swift */; };
-		047D0C6C1D3A8D6800B04AAB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047D0C6B1D3A8D6800B04AAB /* Protocols.swift */; };
+		047D0C6C1D3A8D6800B04AAB /* EngineProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047D0C6B1D3A8D6800B04AAB /* EngineProtocol.swift */; };
 		047D0C6E1D3A8ED800B04AAB /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047D0C6D1D3A8ED800B04AAB /* Engine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0468ADC61D3ADF6500936162 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
-		0468ADC81D3BBA8100936162 /* Classes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classes.swift; sourceTree = "<group>"; };
+		0468ADC81D3BBA8100936162 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		0468ADCA1D3DAD2200936162 /* StandardEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardEngine.swift; sourceTree = "<group>"; };
+		0468ADCD1D3DAD9100936162 /* GridProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridProtocol.swift; sourceTree = "<group>"; };
+		0468ADCF1D3DADBB00936162 /* EngineDelegateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineDelegateProtocol.swift; sourceTree = "<group>"; };
+		0468ADD11D3DADDA00936162 /* CellStateEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellStateEnum.swift; sourceTree = "<group>"; };
 		047D0C521D37D54F00B04AAB /* Assignment4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		047D0C551D37D54F00B04AAB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		047D0C571D37D54F00B04AAB /* InstrumentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentationViewController.swift; sourceTree = "<group>"; };
@@ -32,7 +40,7 @@
 		047D0C611D37D54F00B04AAB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		047D0C631D37D54F00B04AAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		047D0C691D37D66600B04AAB /* StatisticsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
-		047D0C6B1D3A8D6800B04AAB /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		047D0C6B1D3A8D6800B04AAB /* EngineProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineProtocol.swift; sourceTree = "<group>"; };
 		047D0C6D1D3A8ED800B04AAB /* Engine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +55,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0468ADCC1D3DAD7100936162 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0468ADC81D3BBA8100936162 /* Grid.swift */,
+				0468ADCA1D3DAD2200936162 /* StandardEngine.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		0468ADD31D3DAE2F00936162 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				047D0C6B1D3A8D6800B04AAB /* EngineProtocol.swift */,
+				0468ADCF1D3DADBB00936162 /* EngineDelegateProtocol.swift */,
+				0468ADCD1D3DAD9100936162 /* GridProtocol.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		0468ADD41D3DAE4500936162 /* Prev Assign Ref Files */ = {
+			isa = PBXGroup;
+			children = (
+				047D0C6D1D3A8ED800B04AAB /* Engine.swift */,
+				0468ADC61D3ADF6500936162 /* GridView.swift */,
+			);
+			name = "Prev Assign Ref Files";
+			sourceTree = "<group>";
+		};
 		047D0C491D37D54F00B04AAB = {
 			isa = PBXGroup;
 			children = (
@@ -67,17 +103,17 @@
 			isa = PBXGroup;
 			children = (
 				047D0C551D37D54F00B04AAB /* AppDelegate.swift */,
-				047D0C5B1D37D54F00B04AAB /* Main.storyboard */,
+				0468ADD11D3DADDA00936162 /* CellStateEnum.swift */,
+				0468ADD31D3DAE2F00936162 /* Protocols */,
+				0468ADCC1D3DAD7100936162 /* Classes */,
 				047D0C571D37D54F00B04AAB /* InstrumentationViewController.swift */,
-				047D0C6B1D3A8D6800B04AAB /* Protocols.swift */,
-				0468ADC81D3BBA8100936162 /* Classes.swift */,
 				047D0C591D37D54F00B04AAB /* SimulationViewController.swift */,
 				047D0C691D37D66600B04AAB /* StatisticsViewController.swift */,
 				047D0C5E1D37D54F00B04AAB /* Assets.xcassets */,
+				047D0C5B1D37D54F00B04AAB /* Main.storyboard */,
 				047D0C601D37D54F00B04AAB /* LaunchScreen.storyboard */,
 				047D0C631D37D54F00B04AAB /* Info.plist */,
-				047D0C6D1D3A8ED800B04AAB /* Engine.swift */,
-				0468ADC61D3ADF6500936162 /* GridView.swift */,
+				0468ADD41D3DAE4500936162 /* Prev Assign Ref Files */,
 			);
 			path = Assignment4;
 			sourceTree = "<group>";
@@ -153,13 +189,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				047D0C6C1D3A8D6800B04AAB /* Protocols.swift in Sources */,
+				047D0C6C1D3A8D6800B04AAB /* EngineProtocol.swift in Sources */,
 				047D0C6E1D3A8ED800B04AAB /* Engine.swift in Sources */,
 				047D0C5A1D37D54F00B04AAB /* SimulationViewController.swift in Sources */,
+				0468ADCE1D3DAD9100936162 /* GridProtocol.swift in Sources */,
+				0468ADD21D3DADDA00936162 /* CellStateEnum.swift in Sources */,
 				0468ADC71D3ADF6500936162 /* GridView.swift in Sources */,
+				0468ADD01D3DADBB00936162 /* EngineDelegateProtocol.swift in Sources */,
 				047D0C561D37D54F00B04AAB /* AppDelegate.swift in Sources */,
 				047D0C581D37D54F00B04AAB /* InstrumentationViewController.swift in Sources */,
-				0468ADC91D3BBA8100936162 /* Classes.swift in Sources */,
+				0468ADC91D3BBA8100936162 /* Grid.swift in Sources */,
+				0468ADCB1D3DAD2200936162 /* StandardEngine.swift in Sources */,
 				047D0C6A1D37D66600B04AAB /* StatisticsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

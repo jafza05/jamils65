@@ -19,7 +19,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
 
     @IBAction func buttonIterate(sender: AnyObject) {
         
-        delegate.step2()
+        StandardEngine.sharedInstance.step(grid)        //button action on the SimVC to invoke the step function and redisplay the cellGrid with the new state of the CellStates
         cellGrid.setNeedsDisplay()
     }
 
@@ -27,13 +27,13 @@ class SimulationViewController: UIViewController, EngineDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var engineDelegate: EngineDelegate
-        StandardEngine.delegate = self
+        var engineDelegate: EngineDelegate      //setup of the SimulationVC as the delegate for the StandardEngine
+        StandardEngine.sharedInstance.delegate = self
         
     }
     
     
-    var grid : [[CellState]] = [[]]
+    var localGrid : [[CellState]] = StandardEngine.sharedInstance.grid
     
     func drawRect(rect: CGRect) {
         
@@ -41,11 +41,11 @@ class SimulationViewController: UIViewController, EngineDelegate {
         
         gridPath.lineWidth = gridWidth
         
-        let heightSpacing: CGFloat = bounds.height / CGFloat(rows)  //determine horizontal grid line spacing
-        let widthSpacing: CGFloat = bounds.width / CGFloat(cols)    //determine vertical gridline spacing
+        let heightSpacing: CGFloat = bounds.height / CGFloat(StandardEngine.sharedInstance.rows)  //determine horizontal grid line spacing
+        let widthSpacing: CGFloat = bounds.width / CGFloat(StandardEngine.sharedInstance.cols)    //determine vertical gridline spacing
         
         
-        for r in 0...rows {
+        for r in 0...StandardEngine.sharedInstance.rows {
             gridPath.moveToPoint(CGPoint(               //draw all the horizontal lines
                 x: 0,
                 y: 0 + heightSpacing * CGFloat(r)))
@@ -55,7 +55,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
                 y: 0 + heightSpacing * CGFloat(r)))
         }
         
-        for c in 0...cols {                             //draw all the vertical lines
+        for c in 0...StandardEngine.sharedInstance.cols {                             //draw all the vertical lines
             
             gridPath.moveToPoint(CGPoint(
                 x: 0 + widthSpacing * CGFloat(c),
@@ -70,8 +70,8 @@ class SimulationViewController: UIViewController, EngineDelegate {
         gridPath.stroke()
         
         
-        for r in 0..<rows{                              //draw circle (oval) in looped squares inside the grid
-            for c in 0..<cols{
+        for r in 0..<StandardEngine.sharedInstance.rows{                              //draw circle (oval) in looped squares inside the grid
+            for c in 0..<StandardEngine.sharedInstance.cols{
                 let xPos: CGFloat = CGFloat(c) * widthSpacing
                 let yPos: CGFloat = CGFloat(r) * heightSpacing
                 let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
@@ -79,7 +79,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
                 
                 let path = UIBezierPath(ovalInRect: cellRect)
                 
-                switch grid[r][c] {    //call grid array to determine which color each cell should be
+                switch localGrid[r][c] {    //call grid array to determine which color each cell should be
                     
                 case .living:
                     livingColor.set()

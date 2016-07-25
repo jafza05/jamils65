@@ -20,13 +20,12 @@ isLeap(2000)
 
 func julianDate(year: Int, month: Int, day: Int) -> Int {
     var cumDays: [Int] = [0,31,59,90,120,151,181,212,243,273,304,334]
-    return (isLeap(year) && month > 2) ? cumDays[month-1] + day + 1  : cumDays[month-1] + day
+    let daysToMonth = Array(1900..<year).filter({ isLeap($0) }).count + (year - 1900) * 365 + cumDays[month-1]
+    return daysToMonth + day + ((isLeap(year) && month > 2) ? 1  : 0)
 }
 
-// I could have eliminated the [month-1] and made it [month] by padding the cumDays array with a leading zero, however I thought it made more "readable" sense to make it plus one since you don't want to count all the days of the month you are currently in
 
-
-julianDate(1960, month:  9, day: 28)
+julianDate(1900, month:  9, day: 28)
 julianDate(1961, month:  9, day: 28)
 julianDate(1900, month:  1, day: 1)
 julianDate(1900, month: 12, day: 31)
@@ -42,3 +41,4 @@ julianDate(1961, month:  2, day: 28)
 
 julianDate(1960, month:  3, day: 28)
 julianDate(1961, month:  3, day: 28)
+

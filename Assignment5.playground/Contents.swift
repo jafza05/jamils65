@@ -25,8 +25,7 @@ func julianDate(year: Int, month: Int, day: Int) -> Int {
 }
 
 
-julianDate(1900, month:  9, day: 28)
-julianDate(1961, month:  9, day: 28)
+julianDate(1960, month:  9, day: 28)
 julianDate(1900, month:  1, day: 1)
 julianDate(1900, month: 12, day: 31)
 julianDate(1901, month: 1, day: 1)

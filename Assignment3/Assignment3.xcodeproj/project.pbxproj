@@ -63,8 +63,8 @@
 				04E075BA1D3067B60072BC65 /* ViewController.swift */,
 				04E075CA1D3067D40072BC65 /* GridView.swift */,
 				04E075BF1D3067B60072BC65 /* Assets.xcassets */,
-				04E075C11D3067B60072BC65 /* LaunchScreen.storyboard */,
 				043AEA4E1D341FFC00E4BE16 /* Main.storyboard */,
+				04E075C11D3067B60072BC65 /* LaunchScreen.storyboard */,
 				04E075C41D3067B60072BC65 /* Info.plist */,
 			);
 			name = Assignment3;

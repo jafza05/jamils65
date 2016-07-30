@@ -111,7 +111,7 @@ class ViewController: UIViewController {
             
             let path = UIBezierPath(ovalInRect: cellRect)
             
-            print("\(cellGrid.grid[Int(tRow)][Int(tCol)])")
+            //print("\(cellGrid.grid[Int(tRow)][Int(tCol)])")
             
  /*
             I could not get the cell to change color after clicking it. I will continue to work on this but I am hoping for some partial credit for being able to identify the cell that was clicked, invoke the toggle, and pass into the switch for color state

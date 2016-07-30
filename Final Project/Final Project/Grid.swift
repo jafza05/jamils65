@@ -4,10 +4,10 @@ typealias Position = (row:Int, col: Int)
 
 typealias Cell = (position: Position, state: CellState)
 
-typealias CellInitializer = (Position) -> CellState     //this is s closure
+typealias CellInitializer = (Position) -> CellState     //this is a closure
 
 
-struct Grid: GridProtocol {
+class Grid: GridProtocol {
     private(set) var rows: Int
     private(set) var cols: Int
     var cells: [Cell]

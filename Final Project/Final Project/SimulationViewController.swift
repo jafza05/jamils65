@@ -16,14 +16,9 @@ class SimulationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    var beforeArray = StandardEngine.sharedInstance.grid.cells
     
-    let height: Int = 20
-    let width: Int = 20
-    
-    var beforeArray = [[Bool]](count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
-    var afterArray = [[Bool]](count: 20, repeatedValue: Array(count: 20, repeatedValue: false))
-    
-    //var grid = Array(count: 20, repeatedValue: Array(count: 20, repeatedValue: ViewController.CellState.empty))
+    var afterArray : [Cell] = []
     
     var touchPoints = [UITouch : [CGPoint]]()
     
@@ -34,18 +29,17 @@ class SimulationViewController: UIViewController {
         
         
         
-        for h in 0..<height {               //initialize first state of the array
-            for w in 0..<width {
+        for h in 0..<beforeArray.count {               //initialize first state of the array
                 if Int(arc4random_uniform(3)) == 1 {
-                    beforeArray [h][w] = true
+                    beforeArray[h].state = .Alive
                 }
                 else {
-                    beforeArray [h][w] = false
-                }
+                    beforeArray[h].state = .Empty
+                
             }
         }
-        
         print(beforeArray)
+        print(beforeArray.count)
         
     }
     
@@ -85,7 +79,7 @@ class SimulationViewController: UIViewController {
             
             let path = UIBezierPath(ovalInRect: cellRect)
             
-            print("\(cellGrid.grid[Int(tRow)][Int(tCol)])")
+            //print("\(cellGrid.grid[Int(tRow)][Int(tCol)])")
             
             /*
              I could not get the cell to change color after clicking it. I will continue to work on this but I am hoping for some partial credit for being able to identify the cell that was clicked, invoke the toggle, and pass into the switch for color state

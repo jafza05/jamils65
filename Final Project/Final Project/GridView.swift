@@ -10,23 +10,25 @@ import UIKit
 
 @IBDesignable class GridView: UIView {
     
-    @IBInspectable var rows: Int = 20 {
-        didSet{
-            if rows != oldValue {
-                grid = gridMaker()
-                print("rows changed")
-            }
-        }
-    }
+    @IBInspectable var rows: Int = 20
+//        {
+//        didSet{
+//            if rows != oldValue {
+//                grid = gridMaker()
+//                print("rows changed")
+//            }
+//        }
+//    }
     
-    @IBInspectable var cols: Int = 20 {
-        didSet{
-            if cols != oldValue {
-                grid = gridMaker()
-                print("columns changed")
-            }
-        }
-    }
+    @IBInspectable var cols: Int = 20
+//        {
+//        didSet{
+//            if cols != oldValue {
+//                grid = gridMaker()
+//                print("columns changed")
+//            }
+//        }
+//    }
     
     @IBInspectable var livingColor: UIColor = UIColor.greenColor()
     @IBInspectable var emptyColor: UIColor = UIColor.lightGrayColor()
@@ -35,11 +37,12 @@ import UIKit
     @IBInspectable var gridColor: UIColor = UIColor.blackColor()
     @IBInspectable var gridWidth: CGFloat = 2.0
 
-    func gridMaker() -> [[CellState]] {
-        return Array(count: self.rows, repeatedValue: Array(count: self.cols, repeatedValue: CellState.Empty))
-    }
+//    func gridMaker() -> [[CellState]] {
+//        return Array(count: self.rows, repeatedValue: Array(count: self.cols, repeatedValue: CellState.Empty))
+//    }
     
-    var grid : [[CellState]] = [[CellState.Alive]]
+    //var grid : [[CellState]] = [[CellState.Alive]]
+    
     
     override func drawRect(rect: CGRect) {
         
@@ -75,24 +78,51 @@ import UIKit
             gridColor.setStroke()
             gridPath.stroke()
         
-        
-        for r in 0..<rows{                              //draw circle (oval) in looped squares inside the grid
-            for c in 0..<cols{
-                let xPos: CGFloat = CGFloat(c) * widthSpacing
-                let yPos: CGFloat = CGFloat(r) * heightSpacing
-                let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
+        print(StandardEngine.sharedInstance.rows*StandardEngine.sharedInstance.cols)
+        let totalCells = StandardEngine.sharedInstance.grid.cells.count
+        let rows1 = StandardEngine.sharedInstance.rows
 
-            
+        for p in 0..<totalCells{                              //draw circle (oval) in looped squares inside the grid
+                let xPos: CGFloat = CGFloat(p % rows1) * widthSpacing
+                let yPos: CGFloat = floor(CGFloat(p / rows1)) * heightSpacing
+                let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
                 let path = UIBezierPath(ovalInRect: cellRect)
                 
+                print(p % rows1, xPos, floor(CGFloat(p / rows1)), yPos)
+            
+            
+            switch StandardEngine.sharedInstance.grid.cells[p].state {
+            
+            case .Alive:
+                livingColor.set()
+            case .Died:
+                diedColor.set()
+            case .Born:
                 bornColor.set()
-          
+            case .Empty:
+                emptyColor.set()
+            }
+                print(StandardEngine.sharedInstance.grid.cells[p].state)
+                path.fill()
+            
+        }
     
         
-                path.fill()
-                
-            }
-        }
+        
+        
+//        for r in 0..<rows{                              //draw circle (oval) in looped squares inside the grid
+//            for c in 0..<cols{
+//                let xPos: CGFloat = CGFloat(c) * widthSpacing
+//                let yPos: CGFloat = CGFloat(r) * heightSpacing
+//                let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
+//                let path = UIBezierPath(ovalInRect: cellRect)
+//                
+//                bornColor.set()
+//        
+//                path.fill()
+//                
+//            }
+//        }
     }
     
     

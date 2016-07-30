@@ -57,8 +57,6 @@ class StandardEngine: EngineProtocol {
         }
     }
     
-    
-    //v this gives a default value of empty
     init(_ rows: Int, _ cols: Int, cellInitializer: CellInitializer = {_ in .Empty }) {
         self.rows = rows
         self.cols = cols

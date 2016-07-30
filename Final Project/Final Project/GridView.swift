@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable class GridView: UIView {
     
-    @IBInspectable var rows: Int = 20
+    @IBInspectable var rows: Int = 10
 //        {
 //        didSet{
 //            if rows != oldValue {
@@ -20,7 +20,7 @@ import UIKit
 //        }
 //    }
     
-    @IBInspectable var cols: Int = 20
+    @IBInspectable var cols: Int = 10
 //        {
 //        didSet{
 //            if cols != oldValue {
@@ -35,10 +35,11 @@ import UIKit
     @IBInspectable var bornColor: UIColor = UIColor.blueColor()
     @IBInspectable var diedColor: UIColor = UIColor.brownColor()
     @IBInspectable var gridColor: UIColor = UIColor.blackColor()
-    @IBInspectable var gridWidth: CGFloat = 2.0
+    @IBInspectable var gridWidth: CGFloat = 0.0
 
 //    func gridMaker() -> [[CellState]] {
-//        return Array(count: self.rows, repeatedValue: Array(count: self.cols, repeatedValue: CellState.Empty))
+//        return Array(count: self.rows, repeatedValue: Array(count: self.cols, repeatedValue:                              
+//                        CellState.Empty))
 //    }
     
     //var grid : [[CellState]] = [[CellState.Alive]]
@@ -50,12 +51,12 @@ import UIKit
             
         gridPath.lineWidth = gridWidth
 
-        let heightSpacing: CGFloat = bounds.height / CGFloat(rows)  //determine horizontal grid line spacing
-        let widthSpacing: CGFloat = bounds.width / CGFloat(cols)    //determine vertical gridline spacing
+        let heightSpacing: CGFloat = bounds.height / CGFloat(StandardEngine.sharedInstance.rows)  //determine horizontal grid line spacing
+        let widthSpacing: CGFloat = bounds.width / CGFloat(StandardEngine.sharedInstance.cols)    //determine vertical gridline spacing
         
         
-        for r in 0...rows {
-            gridPath.moveToPoint(CGPoint(               //draw all the horizontal lines
+        for r in 0...StandardEngine.sharedInstance.rows {   //draw all the horizontal lines
+            gridPath.moveToPoint(CGPoint(
                 x: 0,
                 y: 0 + heightSpacing * CGFloat(r)))
             
@@ -64,7 +65,7 @@ import UIKit
                 y: 0 + heightSpacing * CGFloat(r)))
         }      
         
-        for c in 0...cols {                             //draw all the vertical lines
+        for c in 0...StandardEngine.sharedInstance.cols {   //draw all the vertical lines
         
             gridPath.moveToPoint(CGPoint(
                 x: 0 + widthSpacing * CGFloat(c),
@@ -88,7 +89,7 @@ import UIKit
                 let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
                 let path = UIBezierPath(ovalInRect: cellRect)
                 
-                print(p % rows1, xPos, floor(CGFloat(p / rows1)), yPos)
+                //print(p % rows1, xPos, floor(CGFloat(p / rows1)), yPos)
             
             
             switch StandardEngine.sharedInstance.grid.cells[p].state {
@@ -102,27 +103,11 @@ import UIKit
             case .Empty:
                 emptyColor.set()
             }
-                print(StandardEngine.sharedInstance.grid.cells[p].state)
+                //print(StandardEngine.sharedInstance.grid.cells[p].state)
                 path.fill()
             
         }
     
-        
-        
-        
-//        for r in 0..<rows{                              //draw circle (oval) in looped squares inside the grid
-//            for c in 0..<cols{
-//                let xPos: CGFloat = CGFloat(c) * widthSpacing
-//                let yPos: CGFloat = CGFloat(r) * heightSpacing
-//                let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
-//                let path = UIBezierPath(ovalInRect: cellRect)
-//                
-//                bornColor.set()
-//        
-//                path.fill()
-//                
-//            }
-//        }
     }
     
     

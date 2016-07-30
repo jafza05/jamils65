@@ -45,7 +45,7 @@ class StandardEngine: EngineProtocol {
     
     weak var delegate: EngineDelegate?
     
-    var refreshRate:  Double = 0.0
+    var refreshRate:  Double = 1.0
     var refreshTimer: NSTimer?
     
     subscript (i:Int, j:Int) -> CellState {
@@ -67,10 +67,10 @@ class StandardEngine: EngineProtocol {
         var newGrid = Grid(self.rows, self.cols)
         newGrid.cells = grid.cells.map {
             switch grid.livingNeighbors($0.position) {
-            case 2 where $0.state.isLiving(),
-            3 where $0.state.isLiving():  return Cell($0.position, .Alive)
-            case 3 where !$0.state.isLiving(): return Cell($0.position, .Born)
-            case _ where $0.state.isLiving():  return Cell($0.position, .Died)
+            case    2 where $0.state.isLiving(),
+                    3 where $0.state.isLiving():  return Cell($0.position, .Alive)
+            case    3 where !$0.state.isLiving(): return Cell($0.position, .Born)
+            case    _ where $0.state.isLiving():  return Cell($0.position, .Died)
             default:                           return Cell($0.position, .Empty)
             }
         }

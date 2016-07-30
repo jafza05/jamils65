@@ -28,32 +28,41 @@ class SimulationViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        
         for h in 0..<beforeArray.count {               //initialize first state of the array
                 if Int(arc4random_uniform(3)) == 1 {
                     beforeArray[h].state = .Alive
                 }
                 else {
                     beforeArray[h].state = .Empty
-                
             }
         }
+        
+        /*
+        Glider preload for testing
+        beforeArray[1].state = .Alive
+        beforeArray[22].state = .Alive
+        beforeArray[40].state = .Alive
+        beforeArray[41].state = .Alive
+        beforeArray[42].state = .Alive
+        */
+        
+        StandardEngine.sharedInstance.grid.cells = beforeArray
+        
         print(beforeArray)
         print(beforeArray.count)
-        
     }
     
-    /*
-    @IBAction func bttnIterate(sender: AnyObject) {
-        
-        
-        beforeArray = step2(beforeArray).afterArray     //iterate the cells
-        cellGrid.grid = step2(beforeArray).gridCS
+    func iterate() {
+        print("This button is working")
+        print(StandardEngine.sharedInstance.step())
+        print(StandardEngine.sharedInstance.grid.cells)
         cellGrid.setNeedsDisplay()
-        
     }
- */
- 
+    
+    @IBAction func btnIterate(sender: AnyObject) {
+        iterate()
+    }
+
     @IBOutlet weak var cellGrid: GridView!
     
     
@@ -78,6 +87,7 @@ class SimulationViewController: UIViewController {
             
             
             let path = UIBezierPath(ovalInRect: cellRect)
+            
             
             //print("\(cellGrid.grid[Int(tRow)][Int(tCol)])")
             

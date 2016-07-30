@@ -62,6 +62,23 @@ class SimulationViewController: UIViewController {
     @IBAction func btnIterate(sender: AnyObject) {
         iterate()
     }
+    
+    var timer = NSTimer()
+    
+    @IBAction func btnStart(sender: UIButton) {
+        timer.invalidate()
+        timer = NSTimer(timeInterval: 0.5, target: self, selector: #selector(iterate), userInfo: nil, repeats: true)
+        print("timer started")
+    }
+    
+    @IBAction func btnStop(sender: UIButton) {
+        timer.invalidate()
+        print("timer stopped")
+        
+    }
+
+    
+    
 
     @IBOutlet weak var cellGrid: GridView!
     

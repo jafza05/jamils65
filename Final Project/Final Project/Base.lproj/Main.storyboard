@@ -84,6 +84,9 @@
                                     <constraint firstAttribute="width" constant="46" id="DcV-6g-7EV"/>
                                 </constraints>
                                 <state key="normal" title="Start"/>
+                                <connections>
+                                    <action selector="btnStart:" destination="uSC-Es-r8l" eventType="touchUpInside" id="3yW-N8-Y8D"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3s-Ab-tSl">
                                 <rect key="frame" x="375" y="30" width="46" height="30"/>
@@ -92,6 +95,9 @@
                                     <constraint firstAttribute="height" constant="30" id="gxJ-Y2-gYd"/>
                                 </constraints>
                                 <state key="normal" title="Stop"/>
+                                <connections>
+                                    <action selector="btnStop:" destination="uSC-Es-r8l" eventType="touchUpInside" id="k3f-np-owF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

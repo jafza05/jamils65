@@ -48,14 +48,13 @@ class SimulationViewController: UIViewController {
         
         StandardEngine.sharedInstance.grid.cells = beforeArray
         
-        print(beforeArray)
-        print(beforeArray.count)
+        //print(beforeArray)
     }
     
     func iterate() {
         print("This button is working")
-        print(StandardEngine.sharedInstance.step())
-        print(StandardEngine.sharedInstance.grid.cells)
+        StandardEngine.sharedInstance.step()
+        //print(StandardEngine.sharedInstance.grid.cells)
         cellGrid.setNeedsDisplay()
     }
     
@@ -63,21 +62,30 @@ class SimulationViewController: UIViewController {
         iterate()
     }
     
-    var timer = NSTimer()
     
     @IBAction func btnStart(sender: UIButton) {
-        timer.invalidate()
-        timer = NSTimer(timeInterval: 0.5, target: self, selector: #selector(iterate), userInfo: nil, repeats: true)
+        StandardEngine.sharedInstance.refreshTimer = NSTimer(timeInterval: StandardEngine.sharedInstance.refreshRate, target: self, selector: #selector(testFunk), userInfo: nil, repeats: true)
         print("timer started")
     }
     
     @IBAction func btnStop(sender: UIButton) {
-        timer.invalidate()
+        StandardEngine.sharedInstance.refreshTimer!.invalidate()
         print("timer stopped")
         
     }
+    @IBAction func btnReset(sender: AnyObject) {
+        for h in 0..<StandardEngine.sharedInstance.grid.cells.count {               //set all cells to empty
+            StandardEngine.sharedInstance.grid.cells[h].state = .Empty
+        }
+        print("Reset")
+        cellGrid.setNeedsDisplay()
+    }
 
     
+    
+    func testFunk() {
+        print("the timer is working")
+    }
     
 
     @IBOutlet weak var cellGrid: GridView!
@@ -94,7 +102,7 @@ class SimulationViewController: UIViewController {
             let tRow = min(max(floor((position.x / (cellGrid.bounds.width / CGFloat(cellGrid.cols)))),0),CGFloat(cellGrid.cols)-1)
             let tCol = min(max(floor((position.y / (cellGrid.bounds.height / CGFloat(cellGrid.rows)))),0),CGFloat(cellGrid.rows)-1)
             
-            //the min and max business is to prevent app crash if you click outside of the view
+            //the min and max  is to prevent app crash if you click outside of the view
             
             print(tRow, tCol)
             

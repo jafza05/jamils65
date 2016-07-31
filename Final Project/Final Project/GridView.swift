@@ -11,14 +11,14 @@ import UIKit
 @IBDesignable class GridView: UIView {
     
     @IBInspectable var rows: Int = 10
-//        {
-//        didSet{
-//            if rows != oldValue {
-//                grid = gridMaker()
-//                print("rows changed")
-//            }
-//        }
-//    }
+        {
+        didSet{
+            if rows != oldValue {
+                //StandardEngine.sharedInstance.grid
+                print("rows changed")
+            }
+        }
+    }
     
     @IBInspectable var cols: Int = 10
 //        {
@@ -36,13 +36,10 @@ import UIKit
     @IBInspectable var diedColor: UIColor = UIColor.brownColor()
     @IBInspectable var gridColor: UIColor = UIColor.blackColor()
     @IBInspectable var gridWidth: CGFloat = 0.0
-
-//    func gridMaker() -> [[CellState]] {
-//        return Array(count: self.rows, repeatedValue: Array(count: self.cols, repeatedValue:                              
-//                        CellState.Empty))
-//    }
     
-    //var grid : [[CellState]] = [[CellState.Alive]]
+    
+    var points: [(px: Int, py: Int)] = []
+    
     
     
     override func drawRect(rect: CGRect) {

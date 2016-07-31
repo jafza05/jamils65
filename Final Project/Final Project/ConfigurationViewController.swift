@@ -10,7 +10,7 @@ import UIKit
 
 class ConfigurationViewController: UITableViewController {
     
-    private var names: Array<String> = []
+    private var names: Array<String> = ["name1","nameTWO"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,20 +19,36 @@ class ConfigurationViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        let url = NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=boston,%20ma&appid=77e555f36584bc0c3d55e1e584960580")!
+        //let url = NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=boston,%20ma&appid=77e555f36584bc0c3d55e1e584960580")!
+        let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         let fetcher = Fetcher()
+        
         fetcher.requestJSON(url) { (json, message) in
             if let json = json,
-                dict = json as? Dictionary<String,AnyObject> {
-                let keys = dict.keys
-                self.names = Array(keys)
+
+                dict = json as? AnyObject {
+//                dict = json as? Dictionary<String,AnyObject> {
+//                let keys = dict.keys
+//                self.names = Array(keys)
+                
+                print(json)
+                
                 let op = NSBlockOperation {
                     self.tableView.reloadData()
                 }
                 NSOperationQueue.mainQueue().addOperation(op)
+                
+                
+                //print(dict["base"], dict["coord"])
+                print(self.names)
+                print(message)
+
+                
             }
         }
     }
+    
+    
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

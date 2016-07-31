@@ -36,6 +36,8 @@ class Fetcher: NSObject, NSURLSessionDelegate, NSURLSessionTaskDelegate {
     }
     
     typealias JSONRequestCompletionHandler = (json:NSObject?, message: String?) -> Void
+    
+    
     func requestJSON(url: NSURL, completion: JSONRequestCompletionHandler) {
         request(url) { (data, message) in
             var json: NSObject?

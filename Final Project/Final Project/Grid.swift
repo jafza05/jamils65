@@ -24,6 +24,10 @@ class Grid: GridProtocol {
     var died: Int = 5
     var empty: Int = 6
     
+    
+    //var points: [[Int]] = [[]]
+    var points = [[0,1],[1,1],[2,0],[2,1],[2,2]]
+    
     init (_ rows: Int, _ cols: Int, cellInitializer: CellInitializer = {_ in .Empty }) {
         self.rows = rows
         self.cols = cols

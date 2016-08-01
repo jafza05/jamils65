@@ -30,15 +30,12 @@ import UIKit
 //        }
 //    }
     
-    @IBInspectable var livingColor: UIColor = UIColor.greenColor()
-    @IBInspectable var emptyColor: UIColor = UIColor.lightGrayColor()
-    @IBInspectable var bornColor: UIColor = UIColor.blueColor()
-    @IBInspectable var diedColor: UIColor = UIColor.brownColor()
+    @IBInspectable var livingColor: UIColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
+    @IBInspectable var emptyColor: UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+    @IBInspectable var bornColor: UIColor = UIColor(red: 197/255, green: 179/255, blue: 88/255, alpha: 1)
+    @IBInspectable var diedColor: UIColor = UIColor(red: 215/255, green: 215/255, blue: 215/255, alpha: 1)
     @IBInspectable var gridColor: UIColor = UIColor.blackColor()
     @IBInspectable var gridWidth: CGFloat = 0.0
-    
-    
-    var points: [(px: Int, py: Int)] = []
     
     
     
@@ -76,7 +73,8 @@ import UIKit
             gridColor.setStroke()
             gridPath.stroke()
         
-        print(StandardEngine.sharedInstance.rows*StandardEngine.sharedInstance.cols)
+        //print(StandardEngine.sharedInstance.rows*StandardEngine.sharedInstance.cols)
+        print("grid redisplayed")
         let totalCells = StandardEngine.sharedInstance.grid.cells.count
         let rows1 = StandardEngine.sharedInstance.rows
 

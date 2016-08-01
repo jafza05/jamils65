@@ -26,16 +26,16 @@ class ConfigurationViewController: UITableViewController {
         fetcher.requestJSON(url) { (json, message) in
             if let json = json,
 
-                dict = json as? AnyObject {
-//                dict = json as? Dictionary<String,AnyObject> {
-//                let keys = dict.keys
-//                self.names = Array(keys)
+                dict = json as? [String : AnyObject?] {
+                let keys = dict.keys
+                self.names = Array(keys)
                 
-                print(json)
+                print(dict)
                 
                 let op = NSBlockOperation {
                     self.tableView.reloadData()
                 }
+                
                 NSOperationQueue.mainQueue().addOperation(op)
                 
                 

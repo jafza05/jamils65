@@ -45,7 +45,7 @@ class StandardEngine: EngineProtocol {
     
     weak var delegate: EngineDelegate?
     
-    var refreshRate:  Double = 1.0
+    var refreshRate:  Double = 0.5
     var refreshTimer: NSTimer?
     
     subscript (i:Int, j:Int) -> CellState {

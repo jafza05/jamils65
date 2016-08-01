@@ -17,41 +17,37 @@ class ConfigurationViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         let fetcher = Fetcher()
         
         fetcher.requestJSON(url) { (json, message) in
             if let json = json,
-
-            let everything = json as? Array<Dictionary<String,AnyObject>> {
+                
+                let everything = json as? Array<Dictionary<String,AnyObject>> {
                 let count = everything.count
                 for p in 0..<count {
                     var targetDict = everything[p]
                     self.names.append(targetDict["title"] as! String)
                     self.presetPos.append(targetDict["contents"] as! Array<Array<Int>>)
-                    }
+                }
                 print(self.names)
-                print(self.presetPos[0])
-                print(self.presetPos[1])
-                print(self.presetPos[2])
-                print(self.presetPos[3])
+                print(self.presetPos)
             }
             
+            let op = NSBlockOperation {
+                self.tableView.reloadData()
+            }
             
-            
-            
-                
-                let op = NSBlockOperation {
-                    self.tableView.reloadData()
-                }
-                
-                NSOperationQueue.mainQueue().addOperation(op)
+            NSOperationQueue.mainQueue().addOperation(op)
             
         }
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+
+
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -69,7 +65,7 @@ class ConfigurationViewController: UITableViewController {
         }
         let row = indexPath.row
         guard let nameLabel = cell.textLabel else {
-            preconditionFailure("wtf?")
+            preconditionFailure("didn't work")
         }
         nameLabel.text = names[row]
         cell.tag = row
@@ -87,23 +83,26 @@ class ConfigurationViewController: UITableViewController {
     }
 
     
-    /*
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let editingRow = (sender as! UITableViewCell).tag
         let editingString = names[editingRow]
-        guard let editingVC = segue.destinationViewController as? EditViewController
+        let presetPoints = presetPos[editingRow]
+        guard let editingVC = segue.destinationViewController as? ConfigurationEditorViewController
             else {
-                preconditionFailure("Another wtf?")
+                preconditionFailure("no worky")
         }
         editingVC.name = editingString
-        editingVC.commit = {
-            self.names[editingRow] = $0
-            let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
-            self.tableView.reloadRowsAtIndexPaths([indexPath],
-                                                  withRowAnimation: .Automatic)
-        }
+        editingVC.presetPoints = presetPoints
+        
+//        editingVC.commit = {
+//            self.names[editingRow] = $0
+//            let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
+//            self.tableView.reloadRowsAtIndexPaths([indexPath],
+//                                                  withRowAnimation: .Automatic)
+//        }
     }
-    */
+    
     
     
 }

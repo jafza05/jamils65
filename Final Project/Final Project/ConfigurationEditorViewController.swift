@@ -14,17 +14,38 @@ class ConfigurationEditorViewController: UIViewController {
     var touchPoints = [UITouch : [CGPoint]]()
     
     @IBOutlet weak var editCellGrid: GridView!
+    var name: String = ""
+    var presetPoints: [[Int]] = [[]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        lblPresetName.text = name
+        print(presetPoints)
+        
+        for h in 0..<StandardEngine.sharedInstance.grid.cells.count {               //set all cells to empty
+            StandardEngine.sharedInstance.grid.cells[h].state = .Empty
+        }
+        
+        for p in 0..<5 {
+            let focusPoint: [Int] = presetPoints[p]
+            let targetCell = (focusPoint[1]*StandardEngine.sharedInstance.grid.cols)+focusPoint[0]
+            StandardEngine.sharedInstance.grid.cells[targetCell].state = .Alive
+//            editCellGrid.setNeedsDisplay()
+        
+        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
+    
+    @IBOutlet weak var lblPresetName: UILabel!
+    
+    
+    
+    //var commit
+
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {

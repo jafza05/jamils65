@@ -38,6 +38,7 @@ import UIKit
     @IBInspectable var gridWidth: CGFloat = 0.0
     
     
+    var points: [[Int]] = [[]]
     
     override func drawRect(rect: CGRect) {
         

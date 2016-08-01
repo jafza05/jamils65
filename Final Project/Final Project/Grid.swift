@@ -25,9 +25,6 @@ class Grid: GridProtocol {
     var empty: Int = 6
     
     
-    //var points: [[Int]] = [[]]
-    var points = [[0,1],[1,1],[2,0],[2,1],[2,2]]
-    
     init (_ rows: Int, _ cols: Int, cellInitializer: CellInitializer = {_ in .Empty }) {
         self.rows = rows
         self.cols = cols
@@ -37,7 +34,7 @@ class Grid: GridProtocol {
         }
     }
     
-    subscript (i:Int, j:Int) -> CellState { // how is this subscript called and where?
+    subscript (i:Int, j:Int) -> CellState {
         get {
             return cells[i*cols+j].state
         }

@@ -20,6 +20,7 @@ protocol GridProtocol {         //in view controller
     var died:   Int { get }
     var empty:  Int { get }
     
+    
     subscript (i:Int, j:Int) -> CellState { get set }
     
     func neighbors(pos: Position) -> [Position]

@@ -534,19 +534,62 @@
                                     <constraint firstAttribute="width" secondItem="nXL-nU-D5U" secondAttribute="height" multiplier="1:1" id="UXV-yX-AQ6"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ula-cz-MUE">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="57i-FT-0SS"/>
+                                    <constraint firstAttribute="height" constant="21" id="nhF-gg-myE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="57i-FT-0SS"/>
+                                        <exclude reference="nhF-gg-myE"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="57i-FT-0SS"/>
+                                        <include reference="nhF-gg-myE"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nXL-nU-D5U" firstAttribute="width" relation="lessThanOrEqual" secondItem="jSo-Tg-fvB" secondAttribute="width" multiplier="0.75" id="33f-FL-kah"/>
                             <constraint firstItem="nXL-nU-D5U" firstAttribute="height" secondItem="jSo-Tg-fvB" secondAttribute="height" multiplier="0.75" priority="750" id="Edv-rS-NJQ"/>
                             <constraint firstItem="nXL-nU-D5U" firstAttribute="centerX" secondItem="jSo-Tg-fvB" secondAttribute="centerX" id="Haj-am-Evw"/>
+                            <constraint firstItem="ula-cz-MUE" firstAttribute="centerX" secondItem="jSo-Tg-fvB" secondAttribute="centerX" id="M16-As-YVj"/>
                             <constraint firstItem="nXL-nU-D5U" firstAttribute="width" secondItem="jSo-Tg-fvB" secondAttribute="width" multiplier="0.75" priority="750" id="O8I-en-raV"/>
                             <constraint firstItem="nXL-nU-D5U" firstAttribute="height" relation="lessThanOrEqual" secondItem="jSo-Tg-fvB" secondAttribute="height" multiplier="0.75" id="T0z-v8-TNi"/>
                             <constraint firstItem="nXL-nU-D5U" firstAttribute="centerY" secondItem="jSo-Tg-fvB" secondAttribute="centerY" id="Zoh-vy-J6o"/>
+                            <constraint firstItem="nXL-nU-D5U" firstAttribute="top" secondItem="ula-cz-MUE" secondAttribute="bottom" constant="15" id="iyd-Jp-rPh"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ula-cz-MUE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="iyd-Jp-rPh"/>
+                                <exclude reference="M16-As-YVj"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="ula-cz-MUE"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="iyd-Jp-rPh"/>
+                                <include reference="M16-As-YVj"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="editCellGrid" destination="Zoh-vy-J6o" id="3bg-Xd-Qnt"/>
+                        <outlet property="lblPresetName" destination="ula-cz-MUE" id="Qnu-Lb-7da"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dul-Mx-pEF" userLabel="First Responder" sceneMemberID="firstResponder"/>

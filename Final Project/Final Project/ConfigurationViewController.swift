@@ -10,7 +10,8 @@ import UIKit
 
 class ConfigurationViewController: UITableViewController {
     
-    private var names: Array<String> = ["name1","nameTWO"]
+    private var names: Array<String> = []
+    private var presetPos: Array<Array<Array<Int>>> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,47 +28,31 @@ class ConfigurationViewController: UITableViewController {
             if let json = json,
 
             let everything = json as? Array<Dictionary<String,AnyObject>> {
-                let contents = everything.count
-                for p in 0..<contents {
+                let count = everything.count
+                for p in 0..<count {
                     var targetDict = everything[p]
-                    self.names.append((targetDict["title"] as! String))
+                    self.names.append(targetDict["title"] as! String)
+                    self.presetPos.append(targetDict["contents"] as! Array<Array<Int>>)
                     }
-//                let first = everything[0]
-//                let firstSub = first["title"].append
-//                let names = everything["title"] as? String
-
-                
-//                print(contents)
-//                print(names)
-                //print (self.names)
-                
-                //print("\(everything)")
-                //print(contents)
-                //print(first)
                 print(self.names)
+                print(self.presetPos[0])
+                print(self.presetPos[1])
+                print(self.presetPos[2])
+                print(self.presetPos[3])
             }
             
-                //print(json)
-
-                //print(self.title)
-                //print(self.contents)
+            
+            
+            
                 
                 let op = NSBlockOperation {
                     self.tableView.reloadData()
                 }
                 
                 NSOperationQueue.mainQueue().addOperation(op)
-                
-                
-                //print(dict["base"], dict["coord"])
-                //print(self.names)
-
-                
             
         }
     }
-    
-    
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

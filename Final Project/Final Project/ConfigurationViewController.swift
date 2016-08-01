@@ -26,14 +26,25 @@ class ConfigurationViewController: UITableViewController {
         fetcher.requestJSON(url) { (json, message) in
             if let json = json,
 
-            everything = json as? AnyObject {
-                let contents = everything["contents"] as? Array<Array<Int>>
-                let names = everything["title"] as? String
+            let everything = json as? Array<Dictionary<String,AnyObject>> {
+                let contents = everything.count
+                for p in 0..<contents {
+                    var targetDict = everything[p]
+                    self.names.append((targetDict["title"] as! String))
+                    }
+//                let first = everything[0]
+//                let firstSub = first["title"].append
+//                let names = everything["title"] as? String
 
                 
-                print(contents)
-                print(names)
+//                print(contents)
+//                print(names)
                 //print (self.names)
+                
+                //print("\(everything)")
+                //print(contents)
+                //print(first)
+                print(self.names)
             }
             
                 //print(json)

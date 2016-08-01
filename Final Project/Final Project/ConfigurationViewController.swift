@@ -19,18 +19,27 @@ class ConfigurationViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        //let url = NSURL(string: "http://api.openweathermap.org/data/2.5/weather?q=boston,%20ma&appid=77e555f36584bc0c3d55e1e584960580")!
+
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         let fetcher = Fetcher()
         
         fetcher.requestJSON(url) { (json, message) in
             if let json = json,
 
-                dict = json as? [String : AnyObject?] {
-                let keys = dict.keys
-                self.names = Array(keys)
+            everything = json as? AnyObject {
+                let contents = everything["contents"] as? Array<Array<Int>>
+                let names = everything["title"] as? String
+
                 
-                print(dict)
+                print(contents)
+                print(names)
+                //print (self.names)
+            }
+            
+                //print(json)
+
+                //print(self.title)
+                //print(self.contents)
                 
                 let op = NSBlockOperation {
                     self.tableView.reloadData()
@@ -40,11 +49,10 @@ class ConfigurationViewController: UITableViewController {
                 
                 
                 //print(dict["base"], dict["coord"])
-                print(self.names)
-                print(message)
+                //print(self.names)
 
                 
-            }
+            
         }
     }
     

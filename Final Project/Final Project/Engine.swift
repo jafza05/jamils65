@@ -45,7 +45,7 @@ class StandardEngine: EngineProtocol {
     
     weak var delegate: EngineDelegate?
     
-    var refreshRate:  Double = 0.5
+    var refreshRate:  Double = 0.2
     var refreshTimer: NSTimer?
     
     subscript (i:Int, j:Int) -> CellState {
@@ -64,7 +64,7 @@ class StandardEngine: EngineProtocol {
     }
     
     func step() -> GridProtocol {
-        var newGrid = Grid(self.rows, self.cols)
+        let newGrid = Grid(self.rows, self.cols)
         newGrid.cells = grid.cells.map {
             switch grid.livingNeighbors($0.position) {
             case    2 where $0.state.isLiving(),

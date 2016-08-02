@@ -75,7 +75,7 @@ import UIKit
             gridPath.stroke()
         
         //print(StandardEngine.sharedInstance.rows*StandardEngine.sharedInstance.cols)
-        print("grid redisplayed")
+        print("gridview  redisplay")
         let totalCells = StandardEngine.sharedInstance.grid.cells.count
         let rows1 = StandardEngine.sharedInstance.rows
 

@@ -14,42 +14,40 @@ class ConfigurationEditorViewController: UIViewController {
     var touchPoints = [UITouch : [CGPoint]]()
     
     @IBOutlet weak var editCellGrid: GridView!
+    
     var name: String = ""
     var presetPoints: [[Int]] = [[]]
+    var commit: (String -> Void)?
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        lblPresetName.text = name
+        lblName.text = name
         print(presetPoints)
         
+        //let pointMax = presetPoints.map({ $0.maxElement()!}).maxElement()!
+        //StandardEngine.sharedInstance.grid.rows = pointMax * 2
+        //StandardEngine.sharedInstance.grid.cols = pointMax * 2
+
         for h in 0..<StandardEngine.sharedInstance.grid.cells.count {               //set all cells to empty
             StandardEngine.sharedInstance.grid.cells[h].state = .Empty
         }
         
-        for p in 0..<5 {
+        for p in 0..<presetPoints.count {
             let focusPoint: [Int] = presetPoints[p]
             let targetCell = (focusPoint[1]*StandardEngine.sharedInstance.grid.cols)+focusPoint[0]
             StandardEngine.sharedInstance.grid.cells[targetCell].state = .Alive
-//            editCellGrid.setNeedsDisplay()
-        
         }
     }
     
-
-    
-    
-    @IBOutlet weak var lblPresetName: UILabel!
-    
-    
-    
-    //var commit
-
+    @IBOutlet weak var lblName: UITextField!
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
-            let position :CGPoint = touch.locationInView(editCellGrid)
+            let position: CGPoint = touch.locationInView(editCellGrid)
             print(position.x, position.y)
             
             let heightSpacing = editCellGrid.bounds.height / CGFloat(StandardEngine.sharedInstance.rows)
@@ -80,10 +78,9 @@ class ConfigurationEditorViewController: UIViewController {
             print(StandardEngine.sharedInstance.grid.cells[touchedPoint].state)
             path.fill()
             
-
+            
             editCellGrid.setNeedsDisplay()
         }
     }
 
-    
 }

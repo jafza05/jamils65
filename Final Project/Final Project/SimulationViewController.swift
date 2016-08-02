@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SimulationViewController: UIViewController {
+class SimulationViewController: UIViewController, EngineDelegate {
 
 
     override func didReceiveMemoryWarning() {
@@ -18,50 +18,27 @@ class SimulationViewController: UIViewController {
     
     var beforeArray = StandardEngine.sharedInstance.grid.cells
     
-    var afterArray : [Cell] = []
-    
     var touchPoints = [UITouch : [CGPoint]]()
     
+    var engine = StandardEngine.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        
-        if StandardEngine.sharedInstance.grid.rows != 0 {   //need to turn this to Points not rows
-                randomize()
-                print(StandardEngine.sharedInstance.grid)
-        }
-        
-        else {
-            /*
-            let pointMax = points.map({ $0.maxElement()!}).maxElement()!
-            StandardEngine.sharedInstance.grid.rows = pointMax * 2
-            StandardEngine.sharedInstance.grid.cols = pointMax * 2
-             
-            reset()
-            
-            for p in 0..<StandardEngine.sharedInstance.grid. {
-                let cPoint: [Int] = StandardEngine.sharedInstance.grid.points[p]
-                let targetCell = (cPoint[1]*StandardEngine.sharedInstance.grid.cols)+cPoint[0]
-                beforeArray[targetCell].state = .Alive
-             
-            }
-            */
-            StandardEngine.sharedInstance.grid.cells = beforeArray
-            cellGrid.setNeedsDisplay()
-        }
-        
-        /*
-        Glider preload for testing
-        beforeArray[1].state = .Alive
-        beforeArray[22].state = .Alive
-        beforeArray[40].state = .Alive
-        beforeArray[41].state = .Alive
-        beforeArray[42].state = .Alive
-        */
-        
-
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        cellGrid.setNeedsDisplay()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        engine.refreshTimer?.invalidate()
+        print("timer stopped")
+    }
+    
+    func engineDidUpdate(withGrid: GridProtocol) {
+        cellGrid.setNeedsDisplay()
     }
     
     func randomize() {
@@ -74,16 +51,22 @@ class SimulationViewController: UIViewController {
                 beforeArray[h].state = .Empty
             }
         }
-        StandardEngine.sharedInstance.grid.cells = beforeArray
-        print("\(StandardEngine.sharedInstance.grid.cells)")
+        engine.grid.cells = beforeArray
         cellGrid.setNeedsDisplay()
     }
     
     func iterate() {
         print("Iterate called")
-        print("This button is working")
-        StandardEngine.sharedInstance.step()
-        //print(StandardEngine.sharedInstance.grid.cells)
+        engine.step()
+        cellGrid.setNeedsDisplay()
+    }
+    
+    
+    func reset() {
+        for h in 0..<engine.grid.cells.count {               //set all cells to empty
+            engine.grid.cells[h].state = .Empty
+        }
+        print("Reset")
         cellGrid.setNeedsDisplay()
     }
     
@@ -91,37 +74,23 @@ class SimulationViewController: UIViewController {
         iterate()
     }
     
-    
-    
     @IBAction func btnStart(sender: UIButton) {
-        StandardEngine.sharedInstance.refreshTimer =
-        NSTimer.scheduledTimerWithTimeInterval(StandardEngine.sharedInstance.refreshRate, target: self, selector: #selector(iterate), userInfo: nil, repeats: true)
+        engine.refreshTimer?.invalidate()
+        engine.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(engine.refreshRate, target:
+                                                                self, selector: #selector(iterate), userInfo: nil, repeats: true)
         print("timer started")
     }
     
-    
-    
-    
     @IBAction func btnStop(sender: UIButton) {
-        StandardEngine.sharedInstance.refreshTimer!.invalidate()
+        engine.refreshTimer!.invalidate()
         print("timer stopped")
         
     }
+    
     @IBAction func btnReset(sender: AnyObject) {
-        for h in 0..<StandardEngine.sharedInstance.grid.cells.count {               //set all cells to empty
-            StandardEngine.sharedInstance.grid.cells[h].state = .Empty
-        }
-        print("Reset")
-        cellGrid.setNeedsDisplay()
+        reset()
     }
 
-    func reset() {
-        for h in 0..<StandardEngine.sharedInstance.grid.cells.count {               //set all cells to empty
-            StandardEngine.sharedInstance.grid.cells[h].state = .Empty
-        }
-        print("Reset")
-        cellGrid.setNeedsDisplay()
-    }
     
     @IBAction func btnRandom(sender: AnyObject) {
         randomize()
@@ -135,16 +104,16 @@ class SimulationViewController: UIViewController {
             let position :CGPoint = touch.locationInView(cellGrid)
             print(position.x, position.y)
             
-            let heightSpacing = cellGrid.bounds.height / CGFloat(StandardEngine.sharedInstance.rows)
+            let heightSpacing = cellGrid.bounds.height / CGFloat(engine.rows)
             let widthSpacing = cellGrid.bounds.width / CGFloat(StandardEngine.sharedInstance.cols)
             
-            let tRow = min(max(floor((position.x / (cellGrid.bounds.width / CGFloat(StandardEngine.sharedInstance.cols)))),0),CGFloat(StandardEngine.sharedInstance.cols)-1)
-            let tCol = min(max(floor((position.y / (cellGrid.bounds.height / CGFloat(StandardEngine.sharedInstance.rows)))),0),CGFloat(StandardEngine.sharedInstance.rows)-1)
+            let tRow = min(max(floor((position.x / (cellGrid.bounds.width / CGFloat(engine.cols)))),0),CGFloat(engine.cols)-1)
+            let tCol = min(max(floor((position.y / (cellGrid.bounds.height / CGFloat(engine.rows)))),0),CGFloat(engine.rows)-1)
             
             //the min and max is to prevent app crash if you click outside of the view
             
             print(tRow, tCol)
-            let touchedPoint = (Int(tCol)*Int(StandardEngine.sharedInstance.grid.cols))+Int(tRow)
+            let touchedPoint = (Int(tCol)*Int(engine.grid.cols))+Int(tRow)
             print(touchedPoint)
             
             let xPos: CGFloat = tRow * widthSpacing
@@ -154,41 +123,59 @@ class SimulationViewController: UIViewController {
             
             let path = UIBezierPath(ovalInRect: cellRect)
             
-            switch StandardEngine.sharedInstance.grid.cells[touchedPoint].state {
+            switch engine.grid.cells[touchedPoint].state {
                 
             case .Alive, .Born:
-                StandardEngine.sharedInstance.grid.cells[touchedPoint].state = .Empty
+                engine.grid.cells[touchedPoint].state = .Empty
             case .Died, .Empty:
-                StandardEngine.sharedInstance.grid.cells[touchedPoint].state = .Alive
+                engine.grid.cells[touchedPoint].state = .Alive
             }
             
-            print(StandardEngine.sharedInstance.grid.cells[touchedPoint].state)
             path.fill()
+            print("touch redisplay")
+            cellGrid.setNeedsDisplay()
             
-            
-            //print("\(cellGrid.grid[Int(tRow)][Int(tCol)])")
-            
-            /*
-             I could not get the cell to change color after clicking it. I will continue to work on this but I am hoping for some partial credit for being able to identify the cell that was clicked, invoke the toggle, and pass into the switch for color state
-             
-             var toggledState: CellState = cellGrid.grid[Int(tRow)][Int(tCol)].toggle()
-             
-             switch toggledState {
-             
-             case .empty, .died:
-             cellGrid.livingColor.set()
-             case .living, .born:
-             cellGrid.emptyColor.set()
-             
-             }
-
-             */
-             cellGrid.setNeedsDisplay()
-            
-            //path.fill()
         }
     }
 
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let position :CGPoint = touch.locationInView(cellGrid)
+            print(position.x, position.y)
+            
+            let heightSpacing = cellGrid.bounds.height / CGFloat(engine.rows)
+            let widthSpacing = cellGrid.bounds.width / CGFloat(StandardEngine.sharedInstance.cols)
+            
+            let tRow = min(max(floor((position.x / (cellGrid.bounds.width / CGFloat(engine.cols)))),0),CGFloat(engine.cols)-1)
+            let tCol = min(max(floor((position.y / (cellGrid.bounds.height / CGFloat(engine.rows)))),0),CGFloat(engine.rows)-1)
+            
+            //the min and max is to prevent app crash if you click outside of the view
+            
+            print(tRow, tCol)
+            let touchedPoint = (Int(tCol)*Int(engine.grid.cols))+Int(tRow)
+            print(touchedPoint)
+            
+            let xPos: CGFloat = tRow * widthSpacing
+            let yPos: CGFloat = tCol * heightSpacing
+            let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
+            
+            
+            let path = UIBezierPath(ovalInRect: cellRect)
+            
+            switch engine.grid.cells[touchedPoint].state {
+                
+            case .Alive, .Born:
+                engine.grid.cells[touchedPoint].state = .Empty
+            case .Died, .Empty:
+                engine.grid.cells[touchedPoint].state = .Alive
+            }
+            
+            path.fill()
+            print("touch redisplay")
+            cellGrid.setNeedsDisplay()
+            
+        }
+    }
 
 
 }

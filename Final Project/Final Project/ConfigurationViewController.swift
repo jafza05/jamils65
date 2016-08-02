@@ -25,6 +25,7 @@ class ConfigurationViewController: UITableViewController {
                 
                 let everything = json as? Array<Dictionary<String,AnyObject>> {
                 let count = everything.count
+                
                 for p in 0..<count {
                     var targetDict = everything[p]
                     self.names.append(targetDict["title"] as! String)
@@ -88,19 +89,17 @@ class ConfigurationViewController: UITableViewController {
         let editingRow = (sender as! UITableViewCell).tag
         let editingString = names[editingRow]
         let presetPoints = presetPos[editingRow]
-        guard let editingVC = segue.destinationViewController as? ConfigurationEditorViewController
+        guard let configEditorVC = segue.destinationViewController as? ConfigurationEditorViewController
             else {
                 preconditionFailure("no worky")
         }
-        editingVC.name = editingString
-        editingVC.presetPoints = presetPoints
-        
-//        editingVC.commit = {
-//            self.names[editingRow] = $0
+        configEditorVC.name = editingString
+        configEditorVC.presetPoints = presetPoints
+//        configEditorVC.commit = {
+//            self.configurations[editingRow].title = $0
 //            let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
 //            self.tableView.reloadRowsAtIndexPaths([indexPath],
 //                                                  withRowAnimation: .Automatic)
-//        }
     }
     
     

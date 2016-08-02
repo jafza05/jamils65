@@ -26,6 +26,8 @@ class SimulationViewController: UIViewController, EngineDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //StandardEngine.sharedInstance.grid.rows = 50
+        
     }
     
     override func viewDidAppear(animated: Bool) {

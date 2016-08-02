@@ -14,9 +14,10 @@ class InstrumentationViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        freqLabel.text = ("Frequency \(StandardEngine.sharedInstance.refreshRate) hz")
-        //rowLabel.text = ("\(StandardEngine.sharedInstance.grid.rows)")
+        freqLabel.text = ("\(StandardEngine.sharedInstance.refreshRate) hz")
+        rowLabel.text = ("\(StandardEngine.sharedInstance.grid.rows)")
         colLabel.text = ("\(StandardEngine.sharedInstance.grid.cols)")
+        freqSliderOutlet.value = Float(StandardEngine.sharedInstance.refreshRate)
         
     }
 
@@ -48,10 +49,11 @@ class InstrumentationViewController: UIViewController {
     }
     
     @IBAction func freqSlider(sender: AnyObject) {
+        freqLabel.text = ("\(round(freqSliderOutlet.value*10)/10) hz")
     }
 
     
-    
+    @IBOutlet weak var freqSliderOutlet: UISlider!
     @IBOutlet weak var freqLabel: UILabel!
     @IBOutlet weak var refreshStatus: UILabel!
     @IBOutlet weak var refreshSwitch: UISwitch!

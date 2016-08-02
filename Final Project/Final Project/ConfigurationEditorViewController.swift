@@ -18,8 +18,32 @@ class ConfigurationEditorViewController: UIViewController {
     var name: String = ""
     var presetPoints: [[Int]] = [[]]
     var commit: (String -> Void)?
-
+    var engine = StandardEngine.sharedInstance
     
+    func newGridSizer() -> Int {
+        let pointMax = presetPoints.map({ $0.maxElement()!}).maxElement()!
+        let newGridDim = Int(floor(Double(pointMax) * 1.5))
+        print(newGridDim)
+        return newGridDim
+    }
+    
+    var cols: Int {
+        get {
+            return newGridSizer()
+        }
+        set {
+            engine.cols = newValue
+        }
+    }
+    
+    var rows: Int {
+        get {
+            return newGridSizer()
+        }
+        set {
+            engine.rows = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +52,11 @@ class ConfigurationEditorViewController: UIViewController {
         lblName.text = name
         print(presetPoints)
         
-        //let pointMax = presetPoints.map({ $0.maxElement()!}).maxElement()!
-        //StandardEngine.sharedInstance.grid.rows = pointMax * 2
-        //StandardEngine.sharedInstance.grid.cols = pointMax * 2
+        
+
+        
+        
+        
 
         for h in 0..<StandardEngine.sharedInstance.grid.cells.count {               //set all cells to empty
             StandardEngine.sharedInstance.grid.cells[h].state = .Empty

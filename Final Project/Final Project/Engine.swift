@@ -24,7 +24,7 @@ enum CellState {
 
 class StandardEngine: EngineProtocol {
     
-    private static var _sharedInstance: StandardEngine = StandardEngine(20,20)
+    private static var _sharedInstance: StandardEngine = StandardEngine(100,100)
     static var sharedInstance: StandardEngine { get { return _sharedInstance } }
     
     var grid: GridProtocol

@@ -143,13 +143,14 @@ class ConfigurationViewController: UITableViewController {
         }
         configEditorVC.name = editingString
         configEditorVC.presetPoints = presetPoints
-//        configEditorVC.commit = {
-//            self.configurations[editingRow].title = $0
-//            let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
-//            self.tableView.reloadRowsAtIndexPaths([indexPath],
-//                                                  withRowAnimation: .Automatic)
+        configEditorVC.commit = {
+            self.configurations[editingRow].title = $0
+            let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
+            self.tableView.reloadRowsAtIndexPaths([indexPath],
+                                                  withRowAnimation: .Automatic)
     }
-    
+   
+    }
     
     
 }

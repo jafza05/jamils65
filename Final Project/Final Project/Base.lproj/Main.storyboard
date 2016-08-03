@@ -534,7 +534,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter JSON URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gzv-Hg-4uf">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://dl.dropboxusercontent.com/u/7544475/S65g.json" borderStyle="roundedRect" placeholder="Enter JSON URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gzv-Hg-4uf">
                                 <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1fJ-3d-RWD"/>
@@ -727,7 +727,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Default" id="EDS-LC-xd0">
-                                <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="560" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EDS-LC-xd0" id="Mbd-Dx-Uof">
                                     <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
@@ -769,7 +769,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="560" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-nU-D5U" customClass="GridView" customModule="Final_Project" customModuleProvider="target">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-nU-D5U" customClass="GridView" customModule="Final_Project" customModuleProvider="target">
                                 <rect key="frame" x="167" y="37" width="225" height="225"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -800,6 +800,9 @@
                                         <include reference="SSN-Ne-2ax"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="saveName:" destination="n4S-nb-Bcc" eventType="touchUpInside" id="dpa-JE-zYJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -823,11 +826,11 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="KaQ-UA-5h6"/>
+                                <exclude reference="0kS-6O-0qQ"/>
+                                <exclude reference="Ep8-E2-Fqr"/>
                                 <exclude reference="XNY-Lf-8Vm"/>
                                 <exclude reference="jQ2-Hq-vl4"/>
                                 <exclude reference="9Rg-oE-6yW"/>
-                                <exclude reference="0kS-6O-0qQ"/>
-                                <exclude reference="Ep8-E2-Fqr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -837,11 +840,11 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="KaQ-UA-5h6"/>
+                                <include reference="0kS-6O-0qQ"/>
+                                <include reference="Ep8-E2-Fqr"/>
                                 <include reference="XNY-Lf-8Vm"/>
                                 <include reference="jQ2-Hq-vl4"/>
                                 <include reference="9Rg-oE-6yW"/>
-                                <include reference="0kS-6O-0qQ"/>
-                                <include reference="Ep8-E2-Fqr"/>
                             </mask>
                         </variation>
                     </view>

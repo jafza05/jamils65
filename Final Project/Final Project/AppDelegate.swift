@@ -11,6 +11,22 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    
+    /* The three icons in the tab bar were sourced from icons8.com
+     https://icons8.com/
+     
+     Instrumentation
+     https://maxcdn.icons8.com/iOS7/PNG/50/Industry/gears-50.png
+     
+     Simulation
+     https://maxcdn.icons8.com/iOS7/PNG/50/Science/bacteria-50.png
+     
+     Statistics
+     https://maxcdn.icons8.com/iOS7/PNG/50/Data/mind_map-50.png
+     
+     */
+    
+    
     var window: UIWindow?
 
 

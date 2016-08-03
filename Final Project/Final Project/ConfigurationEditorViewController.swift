@@ -88,8 +88,12 @@ class ConfigurationEditorViewController: UIViewController {
     @IBOutlet weak var lblName: UITextField!
     
     @IBAction func saveName(sender: AnyObject) {
-        guard let newName = lblName.text, commit = commit
-            else { return }
+        guard let newName = lblName.text,
+            let commit = self.commit
+            else {
+                print("\(#function): Guard fail")
+                return
+        }
         commit(newName)
         navigationController!.popViewControllerAnimated(true)
     }

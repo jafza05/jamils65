@@ -8,19 +8,7 @@
 
 import Foundation
 
-enum CellState {
-    case Empty
-    case Died
-    case Born
-    case Alive
-    
-    func isLiving() -> Bool {
-        switch self {
-        case .Alive, .Born: return true
-        case .Died, .Empty: return false
-        }
-    }
-}
+
 
 class StandardEngine: EngineProtocol {
     
@@ -137,3 +125,45 @@ class StandardEngine: EngineProtocol {
         return grid
     }
 }
+
+enum CellState {
+    case Empty
+    case Died
+    case Born
+    case Alive
+    
+    func isLiving() -> Bool {
+        switch self {
+        case .Alive, .Born: return true
+        case .Died, .Empty: return false
+        }
+    }
+    func isAlive() -> Bool {
+        switch self {
+        case .Alive: return true
+        case .Born, .Died, .Empty: return false
+        }
+    }
+    
+    func isBorn() -> Bool {
+        switch self {
+        case .Born: return true
+        case .Alive, .Died, .Empty: return false
+        }
+    }
+    
+    func isDied() -> Bool {
+        switch self {
+        case .Died: return true
+        case .Born, .Alive, .Empty: return false
+        }
+    }
+    
+    func isEmpty() -> Bool {
+        switch self {
+        case .Empty: return true
+        case .Born, .Died, .Alive: return false
+        }
+    }
+}
+    

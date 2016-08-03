@@ -51,8 +51,7 @@ class ConfigurationViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         //Karan's methods from section
         
-        engine.loadConfigurations("https://dl.dropboxusercontent.com/u/7544475/S65g.json")
-        print(configurations)
+
         
         //original methods
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
@@ -85,9 +84,15 @@ class ConfigurationViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        engine.loadConfigurations("https://dl.dropboxusercontent.com/u/7544475/S65g.json")
+        print(configurations)
+        
         if configurations.count > 1 {
-            print(configurations[1].title)
-            print(configurations[1].positions)
+            print("configurations loaded successfully")
+        }
+        else {
+            print("configurations not loaded")
         }
 
     }
@@ -144,7 +149,8 @@ class ConfigurationViewController: UITableViewController {
         configEditorVC.name = editingString
         configEditorVC.presetPoints = presetPoints
         configEditorVC.commit = {
-            self.configurations[editingRow].title = $0
+            print("Committing <\($0)>")
+            self.names[editingRow] = $0
             let indexPath = NSIndexPath(forRow: editingRow, inSection: 0)
             self.tableView.reloadRowsAtIndexPaths([indexPath],
                                                   withRowAnimation: .Automatic)

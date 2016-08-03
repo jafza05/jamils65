@@ -82,11 +82,10 @@
 			children = (
 				045A056D1D493EFD006614D7 /* AppDelegate.swift */,
 				045A056F1D493EFD006614D7 /* InstrumentationViewController.swift */,
-				045A05711D493EFD006614D7 /* SimulationViewController.swift */,
-				04C5B8C11D5176A8004B8AC2 /* SimulationViewController2.swift */,
+				048D42A11D52889F004AB226 /* Old Stuff */,
 				04C406741D4EA2FE000CDB57 /* Main.storyboard */,
 				045A05A51D4BD425006614D7 /* StatisticsViewController.swift */,
-				045A05B31D4BE760006614D7 /* ViewController.swift */,
+				04C5B8C11D5176A8004B8AC2 /* SimulationViewController2.swift */,
 				045A05A91D4BD60B006614D7 /* GridView.swift */,
 				045A05A71D4BD488006614D7 /* ConfigurationViewController.swift */,
 				045A05AD1D4BD714006614D7 /* ConfigurationEditorViewController.swift */,
@@ -99,6 +98,15 @@
 				045A057B1D493EFD006614D7 /* Info.plist */,
 			);
 			path = "Final Project";
+			sourceTree = "<group>";
+		};
+		048D42A11D52889F004AB226 /* Old Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				045A05B31D4BE760006614D7 /* ViewController.swift */,
+				045A05711D493EFD006614D7 /* SimulationViewController.swift */,
+			);
+			name = "Old Stuff";
 			sourceTree = "<group>";
 		};
 		04A85BEC1D4BFE9400EA3914 /* Protocols */ = {

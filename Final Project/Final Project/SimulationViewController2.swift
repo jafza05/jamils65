@@ -19,11 +19,13 @@ class SimulationViewController2: UIViewController, EngineDelegate {
         
         gridView.setNeedsDisplay()
 
+        engine.delegate = self
 
     }
     
     override func viewDidAppear(animated: Bool) {
         gridView.setNeedsDisplay()
+
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -31,7 +33,7 @@ class SimulationViewController2: UIViewController, EngineDelegate {
         
         gridView.setNeedsDisplay()
         
-        engine.delegate = self
+
     }
     
     func engineDidUpdate(withGrid: GridProtocol) {
@@ -52,6 +54,12 @@ class SimulationViewController2: UIViewController, EngineDelegate {
     }
     
     func iterate() {
+        print("Alive: \(engine.grid.alive)")
+        print("Born: \(engine.grid.born)")
+        print("Died: \(engine.grid.died)")
+        print("Empty: \(engine.grid.empty)")
+        let pctAlive = Float(engine.grid.alive / (engine.grid.cols*engine.grid.rows))*100
+        print("Pct Alive: \(pctAlive)")
         engine.step()
     }
     
@@ -98,7 +106,9 @@ class SimulationViewController2: UIViewController, EngineDelegate {
     
     
     @IBAction func stepButtonPressed(sender: AnyObject) {
+
         engine.step()
+        
     }
     
 

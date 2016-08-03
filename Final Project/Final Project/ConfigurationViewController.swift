@@ -10,6 +10,16 @@ import UIKit
 
 class ConfigurationViewController: UITableViewController {
     
+//    var configurations: [Configuration] {
+//        get {
+//            return engine.configurations
+//        }
+//        
+//        set {
+//            engine.configurations = newValue
+//        }
+//    }
+    
     private var names: Array<String> = []
     private var presetPos: Array<Array<Array<Int>>> = []
     

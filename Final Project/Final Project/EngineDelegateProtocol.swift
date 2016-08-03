@@ -10,4 +10,5 @@ import Foundation
 
 protocol  EngineDelegate: class {
     func engineDidUpdate(withGrid: GridProtocol)
+    //func engineDidUpdate(withConfig: [Configuration])
 }

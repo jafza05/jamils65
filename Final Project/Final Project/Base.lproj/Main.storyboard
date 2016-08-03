@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -30,7 +31,7 @@
         <!--Simulation-->
         <scene sceneID="Ari-ip-23p">
             <objects>
-                <viewController id="uSC-Es-r8l" customClass="SimulationViewController" customModule="Final_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uSC-Es-r8l" customClass="SimulationViewController2" customModule="Final_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="je3-Lv-fq4"/>
                         <viewControllerLayoutGuide type="bottom" id="Sab-9a-y92"/>
@@ -74,7 +75,7 @@
                                 </constraints>
                                 <state key="normal" title="Iterate"/>
                                 <connections>
-                                    <action selector="btnIterate:" destination="uSC-Es-r8l" eventType="touchUpInside" id="seT-Rf-CoT"/>
+                                    <action selector="stepButtonPressed:" destination="uSC-Es-r8l" eventType="touchUpInside" id="KIp-Uj-7Pn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O3s-Ab-tSl">
@@ -100,9 +101,6 @@
                                         <include reference="wGx-pf-puo"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="btnStop:" destination="uSC-Es-r8l" eventType="touchUpInside" id="k3f-np-owF"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOb-M0-mQb">
                                 <rect key="frame" x="534" y="28" width="46" height="30"/>
@@ -127,9 +125,6 @@
                                         <exclude reference="fUQ-tt-p1y"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="btnReset:" destination="uSC-Es-r8l" eventType="touchUpInside" id="dDz-3n-qS7"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekC-26-Bwu" userLabel="Randomize">
                                 <rect key="frame" x="440" y="28" width="78" height="30"/>
@@ -154,9 +149,6 @@
                                         <exclude reference="rit-YB-Tt9"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="btnRandom:" destination="uSC-Es-r8l" eventType="touchUpInside" id="lM5-cz-XiS"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-P7-ybm">
                                 <rect key="frame" x="179" y="30" width="46" height="30"/>
@@ -171,9 +163,6 @@
                                         <exclude reference="DcV-6g-7EV"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <action selector="btnStart:" destination="uSC-Es-r8l" eventType="touchUpInside" id="3yW-N8-Y8D"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -224,7 +213,7 @@
                         <inset key="imageInsets" minX="7" minY="7" maxX="7" maxY="7"/>
                     </tabBarItem>
                     <connections>
-                        <outlet property="cellGrid" destination="fHo-B5-tgl" id="7Wi-Pn-EyR"/>
+                        <outlet property="gridView" destination="fHo-B5-tgl" id="s17-yB-ura"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0qy-YG-hrO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -371,8 +360,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="rowStepepr:" destination="xrk-m4-FgQ" eventType="valueChanged" id="rDX-JO-3eq"/>
-                                    <action selector="rowStepper:" destination="xrk-m4-FgQ" eventType="valueChanged" id="sAg-UF-wgU"/>
+                                    <action selector="colStepper:" destination="xrk-m4-FgQ" eventType="valueChanged" id="dzX-Bu-dQv"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Off" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X53-S5-fmB">
@@ -468,7 +456,7 @@
                                     <segue destination="sQ8-P7-y7H" kind="embed" id="2Sh-9O-wTG"/>
                                 </connections>
                             </containerView>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" maximumValue="100" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dyr-bx-8pv" userLabel="Row Stepper">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" maximumValue="100" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dyr-bx-8pv" userLabel="Row Stepper">
                                 <rect key="frame" x="20" y="21" width="94" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="94" id="DeJ-EU-bPP"/>
@@ -487,7 +475,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="colStepper:" destination="xrk-m4-FgQ" eventType="valueChanged" id="vhI-LA-LfD"/>
+                                    <action selector="rowStepper:" destination="xrk-m4-FgQ" eventType="valueChanged" id="tYi-FN-Tjk"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Rows" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWI-Zd-Uwt">
@@ -573,23 +561,23 @@
                                 <exclude reference="Dyr-bx-8pv"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="FpJ-Qp-31h"/>
                                 <exclude reference="2qa-6g-vq6"/>
                                 <exclude reference="nFK-tG-rkA"/>
                                 <exclude reference="wSH-KC-EzD"/>
                                 <exclude reference="wqo-BK-8oc"/>
+                                <exclude reference="FpJ-Qp-31h"/>
                                 <exclude reference="X5H-E7-Mzz"/>
                                 <exclude reference="lox-Hn-oKp"/>
-                                <exclude reference="2Bi-ui-hgK"/>
                                 <exclude reference="Brm-kA-eX5"/>
                                 <exclude reference="PYQ-iR-Kgc"/>
                                 <exclude reference="nZb-hh-ZnL"/>
                                 <exclude reference="vBQ-e0-XHO"/>
-                                <exclude reference="mwB-em-T2G"/>
-                                <exclude reference="s1C-R4-z8D"/>
+                                <exclude reference="2Bi-ui-hgK"/>
                                 <exclude reference="AdI-3q-Apf"/>
                                 <exclude reference="Doh-la-iw5"/>
                                 <exclude reference="R3e-Gt-bHV"/>
+                                <exclude reference="mwB-em-T2G"/>
+                                <exclude reference="s1C-R4-z8D"/>
                                 <exclude reference="9xx-bQ-fzI"/>
                                 <exclude reference="9y4-9K-huz"/>
                                 <exclude reference="RdT-Bf-miV"/>
@@ -602,23 +590,23 @@
                                 <include reference="Dyr-bx-8pv"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="FpJ-Qp-31h"/>
                                 <include reference="2qa-6g-vq6"/>
                                 <include reference="nFK-tG-rkA"/>
                                 <include reference="wSH-KC-EzD"/>
                                 <include reference="wqo-BK-8oc"/>
+                                <include reference="FpJ-Qp-31h"/>
                                 <include reference="X5H-E7-Mzz"/>
                                 <include reference="lox-Hn-oKp"/>
-                                <include reference="2Bi-ui-hgK"/>
                                 <include reference="Brm-kA-eX5"/>
                                 <include reference="PYQ-iR-Kgc"/>
                                 <include reference="nZb-hh-ZnL"/>
                                 <include reference="vBQ-e0-XHO"/>
-                                <include reference="mwB-em-T2G"/>
-                                <include reference="s1C-R4-z8D"/>
+                                <include reference="2Bi-ui-hgK"/>
                                 <include reference="AdI-3q-Apf"/>
                                 <include reference="Doh-la-iw5"/>
                                 <include reference="R3e-Gt-bHV"/>
+                                <include reference="mwB-em-T2G"/>
+                                <include reference="s1C-R4-z8D"/>
                                 <include reference="9xx-bQ-fzI"/>
                                 <include reference="9y4-9K-huz"/>
                                 <include reference="RdT-Bf-miV"/>
@@ -632,13 +620,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="colLabel" destination="Yms-Wy-lyx" id="gNe-W6-JgX"/>
-                        <outlet property="colStepperOutlet" destination="59l-Wl-m3F" id="9J5-AX-GL9"/>
+                        <outlet property="colStepper" destination="59l-Wl-m3F" id="0Zl-e0-bhY"/>
                         <outlet property="freqLabel" destination="Omw-fJ-JYv" id="Qlb-WZ-mOD"/>
                         <outlet property="freqSliderOutlet" destination="Pt4-RQ-SFQ" id="cZZ-42-wOs"/>
                         <outlet property="refreshStatus" destination="X53-S5-fmB" id="rd5-Jg-1LO"/>
                         <outlet property="refreshSwitch" destination="zkq-6A-wxe" id="ohx-Ah-1OE"/>
                         <outlet property="rowLabel" destination="T9z-1d-VJQ" id="noc-Lk-xHI"/>
-                        <outlet property="rowStepperOutlet" destination="Dyr-bx-8pv" id="Wcb-68-KcZ"/>
+                        <outlet property="rowStepper" destination="Dyr-bx-8pv" id="CJg-13-Fv3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEm-V0-cAv" userLabel="First Responder" sceneMemberID="firstResponder"/>

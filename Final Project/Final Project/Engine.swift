@@ -24,10 +24,20 @@ enum CellState {
 
 class StandardEngine: EngineProtocol {
     
-    private static var _sharedInstance: StandardEngine = StandardEngine(100,100)
+    private static var _sharedInstance: StandardEngine = StandardEngine(20,20)
     static var sharedInstance: StandardEngine { get { return _sharedInstance } }
     
-    var grid: GridProtocol
+//    var configurations: [Configuration] = [] {
+//        didSet {
+//            if let delegate = delegate { delegate.engineDidUpdate(configurations) }
+//        }
+//    }
+
+    var grid: GridProtocol {
+        didSet {
+            if let delegate = delegate { delegate.engineDidUpdate(grid) }
+        }
+    }
     
     var rows: Int = 20 {
         didSet {
@@ -75,7 +85,6 @@ class StandardEngine: EngineProtocol {
             }
         }
         grid = newGrid
-        if let delegate = delegate { delegate.engineDidUpdate(grid) }  //what does this do??
         return grid
     }
 }

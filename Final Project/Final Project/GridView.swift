@@ -9,26 +9,41 @@
 import UIKit
 
 @IBDesignable class GridView: UIView {
+
+    let engine = StandardEngine.sharedInstance
     
-    @IBInspectable var rows: Int = 10
-        {
-        didSet{
-            if rows != oldValue {
-                //StandardEngine.sharedInstance.grid
-                print("rows changed")
-            }
+    
+    var rows: Int {
+        get {
+            return engine.rows
+        }
+        
+        set {
+            engine.rows = newValue
+        }
+    }
+
+    
+    var cols: Int {
+        get {
+            return engine.cols
+        }
+        
+        set {
+            engine.cols = newValue
         }
     }
     
-    @IBInspectable var cols: Int = 10
-//        {
-//        didSet{
-//            if cols != oldValue {
-//                grid = gridMaker()
-//                print("columns changed")
-//            }
-//        }
-//    }
+    var grid: GridProtocol {
+        get {
+            return engine.grid
+        }
+        
+        set {
+            engine.grid = newValue
+        }
+    }
+
     
     @IBInspectable var livingColor: UIColor = UIColor(red: 0, green: 122/255, blue: 1, alpha: 1)
     @IBInspectable var emptyColor: UIColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
@@ -46,11 +61,11 @@ import UIKit
             
         gridPath.lineWidth = gridWidth
 
-        let heightSpacing: CGFloat = bounds.height / CGFloat(StandardEngine.sharedInstance.rows)  //determine horizontal grid line spacing
-        let widthSpacing: CGFloat = bounds.width / CGFloat(StandardEngine.sharedInstance.cols)    //determine vertical gridline spacing
+        let heightSpacing: CGFloat = bounds.height / CGFloat(rows)  //determine horizontal grid line spacing
+        let widthSpacing: CGFloat = bounds.width / CGFloat(cols)    //determine vertical gridline spacing
         
         
-        for r in 0...StandardEngine.sharedInstance.rows {   //draw all the horizontal lines
+        for r in 0...rows {   //draw all the horizontal lines
             gridPath.moveToPoint(CGPoint(
                 x: 0,
                 y: 0 + heightSpacing * CGFloat(r)))
@@ -60,7 +75,7 @@ import UIKit
                 y: 0 + heightSpacing * CGFloat(r)))
         }      
         
-        for c in 0...StandardEngine.sharedInstance.cols {   //draw all the vertical lines
+        for c in 0...cols {   //draw all the vertical lines
         
             gridPath.moveToPoint(CGPoint(
                 x: 0 + widthSpacing * CGFloat(c),
@@ -76,8 +91,8 @@ import UIKit
         
         //print(StandardEngine.sharedInstance.rows*StandardEngine.sharedInstance.cols)
         print("gridview  redisplay")
-        let totalCells = StandardEngine.sharedInstance.grid.cells.count
-        let rows1 = StandardEngine.sharedInstance.rows
+        let totalCells = grid.cells.count
+        let rows1 = rows
 
         for p in 0..<totalCells{                              //draw circle (oval) in looped squares inside the grid
                 let xPos: CGFloat = CGFloat(p % rows1) * widthSpacing
@@ -88,7 +103,7 @@ import UIKit
                 //print(p % rows1, xPos, floor(CGFloat(p / rows1)), yPos)
             
             
-            switch StandardEngine.sharedInstance.grid.cells[p].state {
+            switch grid.cells[p].state {
             
             case .Alive:
                 livingColor.set()
@@ -99,15 +114,90 @@ import UIKit
             case .Empty:
                 emptyColor.set()
             }
-                //print(StandardEngine.sharedInstance.grid.cells[p].state)
+                //print(grid.cells[p].state)
                 path.fill()
             
         }
     
     }
     
+
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let position :CGPoint = touch.locationInView(self)
+            print(position.x, position.y)
+            
+            let heightSpacing = self.bounds.height / CGFloat(rows)
+            let widthSpacing = self.bounds.width / CGFloat(cols)
+            
+            let tRow = min(max(floor((position.x / (self.bounds.width / CGFloat(cols)))),0),CGFloat(cols)-1)
+            let tCol = min(max(floor((position.y / (self.bounds.height / CGFloat(rows)))),0),CGFloat(rows)-1)
+            
+            //the min and max is to prevent app crash if you click outside of the view
+            
+            print(tRow, tCol)
+            let touchedPoint = (Int(tCol)*Int(cols))+Int(tRow)
+            print(touchedPoint)
+            
+            let xPos: CGFloat = tRow * widthSpacing
+            let yPos: CGFloat = tCol * heightSpacing
+            let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
+            
+            
+            let path = UIBezierPath(ovalInRect: cellRect)
+            
+            switch grid.cells[touchedPoint].state {
+                
+            case .Alive, .Born:
+                grid.cells[touchedPoint].state = .Empty
+            case .Died, .Empty:
+                grid.cells[touchedPoint].state = .Alive
+            }
+            
+            path.fill()
+            
+        }
+    }
     
     
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let position :CGPoint = touch.locationInView(self)
+            print(position.x, position.y)
+            
+            let heightSpacing = self.bounds.height / CGFloat(rows)
+            let widthSpacing = self.bounds.width / CGFloat(cols)
+            
+            let tRow = min(max(floor((position.x / (self.bounds.width / CGFloat(cols)))),0),CGFloat(cols)-1)
+            let tCol = min(max(floor((position.y / (self.bounds.height / CGFloat(rows)))),0),CGFloat(rows)-1)
+            
+            //the min and max is to prevent app crash if you click outside of the view
+            
+            print(tRow, tCol)
+            let touchedPoint = (Int(tCol)*Int(cols))+Int(tRow)
+            print(touchedPoint)
+            
+            let xPos: CGFloat = tRow * widthSpacing
+            let yPos: CGFloat = tCol * heightSpacing
+            let cellRect = CGRect(x: xPos, y: yPos, width: widthSpacing, height: heightSpacing)
+            
+            
+            let path = UIBezierPath(ovalInRect: cellRect)
+            
+            switch grid.cells[touchedPoint].state {
+                
+            case .Alive, .Born:
+                grid.cells[touchedPoint].state = .Empty
+            case .Died, .Empty:
+                grid.cells[touchedPoint].state = .Alive
+            }
+            
+            path.fill()
+            
+        }
+    }
+
     /*
      // Only override drawRect: if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.

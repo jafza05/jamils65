@@ -9,6 +9,8 @@
 import UIKit
 
 class InstrumentationViewController: UIViewController {
+    
+    let engine = StandardEngine.sharedInstance
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +31,17 @@ class InstrumentationViewController: UIViewController {
 
     
     @IBAction func rowStepper(sender: UIStepper) {
-        rowLabel.text = Int(sender.value).description
-        print( ("\(rowStepperOutlet.value)"))
-        print("click")
+        engine.rows = Int(sender.value)
+        print("row stepper clicked")
+        rowLabel.text = String(sender.value)
     }
 
     
-    @IBAction func colStepper(sender: AnyObject) {
-        print("column clicked")
+    @IBAction func colStepper(sender: UIStepper) {
+        engine.cols = Int(sender.value)
+        print("column stepper clicked")
+        print(Int(sender.value))
+        colLabel.text = String(sender.value)
         
     }
 
@@ -57,10 +62,10 @@ class InstrumentationViewController: UIViewController {
     @IBOutlet weak var freqLabel: UILabel!
     @IBOutlet weak var refreshStatus: UILabel!
     @IBOutlet weak var refreshSwitch: UISwitch!
-    @IBOutlet weak var rowStepperOutlet: UIStepper!
     @IBOutlet weak var rowLabel: UITextField!
-    @IBOutlet weak var colStepperOutlet: UIStepper!
     @IBOutlet weak var colLabel: UITextField!
+    @IBOutlet weak var colStepper: UIStepper!
+    @IBOutlet weak var rowStepper: UIStepper!
     
 }
 

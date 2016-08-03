@@ -53,7 +53,7 @@ class ConfigurationViewController: UITableViewController {
         
         engine.loadConfigurations("https://dl.dropboxusercontent.com/u/7544475/S65g.json")
         print(configurations)
-        /*
+        
         //original methods
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         let fetcher = Fetcher()
@@ -80,7 +80,7 @@ class ConfigurationViewController: UITableViewController {
             NSOperationQueue.mainQueue().addOperation(op)
             
         }
-        */
+        
         
     }
     

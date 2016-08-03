@@ -58,6 +58,19 @@ class InstrumentationViewController: UIViewController {
         engine.refreshRate = Double(1/(round(freqSliderOutlet.value*10)/10))
     }
 
+    @IBAction func loadJSON(sender: AnyObject) {
+        
+        if jsonString.text!.isEmpty  {
+            print("No JSON")
+        }
+        
+        else {
+            print(jsonString.text)
+            let userJSON = NSURL(fileURLWithPath: jsonString!.text!)
+            engine.loadConfigurations("\(userJSON)")
+        }
+    }
+    
     
     @IBOutlet weak var freqSliderOutlet: UISlider!
     @IBOutlet weak var freqLabel: UILabel!
@@ -67,6 +80,6 @@ class InstrumentationViewController: UIViewController {
     @IBOutlet weak var colLabel: UITextField!
     @IBOutlet weak var colStepper: UIStepper!
     @IBOutlet weak var rowStepper: UIStepper!
-    
+    @IBOutlet weak var jsonString: UITextField!
 }
 

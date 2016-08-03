@@ -21,6 +21,10 @@ class SimulationViewController2: UIViewController, EngineDelegate {
 
 
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        gridView.setNeedsDisplay()
+    }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,7 +60,12 @@ class SimulationViewController2: UIViewController, EngineDelegate {
         for h in 0..<engine.grid.cells.count {               //set all cells to empty
             engine.grid.cells[h].state = .Empty
         }
+    
+        
+        //engine.grid.cells = cellStates.grid.map { _ in .Empty }
+        
         print("Reset")
+        gridView.setNeedsDisplay()
     }
     
 

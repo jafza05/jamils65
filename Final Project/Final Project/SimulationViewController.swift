@@ -65,9 +65,14 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     
     func reset() {
-        for h in 0..<engine.grid.cells.count {               //set all cells to empty
-            engine.grid.cells[h].state = .Empty
-        }
+//        for h in 0..<engine.grid.cells.count {               //set all cells to empty
+//            engine.grid.cells[h].state = .Empty
+//        }
+//        
+        print(engine.grid.cells)
+        
+        //engine.grid.cells = cellStates.map { _ in .Empty }
+        
         print("Reset")
         cellGrid.setNeedsDisplay()
     }

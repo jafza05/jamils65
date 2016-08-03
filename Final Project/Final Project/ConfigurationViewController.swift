@@ -8,17 +8,40 @@
 
 import UIKit
 
-class ConfigurationViewController: UITableViewController {
+
+struct Configuration {
+    var title: String
+    var positions: Array<Position>
+
     
-//    var configurations: [Configuration] {
-//        get {
-//            return engine.configurations
-//        }
-//        
-//        set {
-//            engine.configurations = newValue
-//        }
-//    }
+    static func fromJSON(json: Dictionary<String, AnyObject>) -> Configuration {
+        let title = json["title"] as! String
+        
+        let contents = json["contents"] as! Array<Array<Int>>
+        
+        let positions = contents.map { (intArray) -> Position in
+            return Position(intArray.first!, intArray.last!)
+        }
+        
+        return Configuration(title: title, positions: positions)
+    }
+}
+
+
+class ConfigurationViewController: UITableViewController {
+
+    let engine = StandardEngine.sharedInstance
+    
+    
+    var configurations: [Configuration] {
+        get {
+            return engine.configurations
+        }
+        
+        set {
+            engine.configurations = newValue
+        }
+    }
     
     private var names: Array<String> = []
     private var presetPos: Array<Array<Array<Int>>> = []
@@ -26,7 +49,12 @@ class ConfigurationViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //Karan's methods from section
         
+        engine.loadConfigurations("https://dl.dropboxusercontent.com/u/7544475/S65g.json")
+        print(configurations)
+        /*
+        //original methods
         let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7544475/S65g.json")!
         let fetcher = Fetcher()
         
@@ -41,8 +69,8 @@ class ConfigurationViewController: UITableViewController {
                     self.names.append(targetDict["title"] as! String)
                     self.presetPos.append(targetDict["contents"] as! Array<Array<Int>>)
                 }
-                print(self.names)
-                print(self.presetPos)
+                //print(self.names)
+                //print(self.presetPos)
             }
             
             let op = NSBlockOperation {
@@ -52,12 +80,15 @@ class ConfigurationViewController: UITableViewController {
             NSOperationQueue.mainQueue().addOperation(op)
             
         }
-        
+        */
         
     }
     
     override func viewDidAppear(animated: Bool) {
-
+        if configurations.count > 1 {
+            print(configurations[1].title)
+            print(configurations[1].positions)
+        }
 
     }
     

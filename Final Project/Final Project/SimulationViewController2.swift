@@ -16,8 +16,10 @@ class SimulationViewController2: UIViewController, EngineDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gridView.setNeedsDisplay()
 
-        // Do any additional setup after loading the view.
+
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -32,7 +34,54 @@ class SimulationViewController2: UIViewController, EngineDelegate {
         gridView.setNeedsDisplay()
     }
     
+    func randomize() {
+        print("reset to random")
+        for h in 0..<engine.grid.cells.count {               //initialize first state of the array
+            if Int(arc4random_uniform(3)) == 1 {
+                engine.grid.cells[h].state = .Alive
+            }
+            else {
+                engine.grid.cells[h].state = .Empty
+            }
+        }
+        gridView.setNeedsDisplay()
+    }
     
+    func iterate() {
+        engine.step()
+    }
+    
+    
+    func reset() {
+        for h in 0..<engine.grid.cells.count {               //set all cells to empty
+            engine.grid.cells[h].state = .Empty
+        }
+        print("Reset")
+    }
+    
+
+    
+    @IBAction func btnStart(sender: UIButton) {
+        engine.refreshTimer?.invalidate()
+        engine.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(engine.refreshRate, target:
+            self, selector: #selector(iterate), userInfo: nil, repeats: true)
+        print("timer started")
+    }
+    
+    @IBAction func btnStop(sender: UIButton) {
+        engine.refreshTimer!.invalidate()
+        print("timer stopped")
+        
+    }
+    
+    @IBAction func btnReset(sender: AnyObject) {
+        reset()
+    }
+    
+    
+    @IBAction func btnRandom(sender: AnyObject) {
+        randomize()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

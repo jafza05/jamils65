@@ -33,6 +33,55 @@ class StandardEngine: EngineProtocol {
 //        }
 //    }
 
+    var configurationIndex: Int?
+    var configuration: Configuration? {
+        get {
+            if delegate is ConfigurationEditorViewController {
+                return configurations[configurationIndex!]
+            }
+            return nil
+        }
+        set {
+            if delegate is ConfigurationEditorViewController {
+                configurations[configurationIndex!] = newValue!
+            }
+        }
+    }
+    var configurations:Array<Configuration> = [] {
+        didSet {
+            if let delegate = self.delegate { delegate.engineDidUpdate(self.configurations) }
+        }
+    }
+    
+    func loadConfigurations(urlString: String) {
+        let url = NSURL(string: urlString)!
+        let fetcher = Fetcher()
+        fetcher.requestJSON(url) { (json, message) in
+            if let json = json, array = json as? Array<Dictionary<String,AnyObject>> {
+                
+                self.configurations = array.map({ (dict) -> Configuration in
+                    return Configuration.fromJSON(dict)
+                })
+                
+                let op = NSBlockOperation {
+                    if let delegate = self.delegate { delegate.engineDidUpdate(self.configurations) }
+                }
+                NSOperationQueue.mainQueue().addOperation(op)
+            }
+        }
+    }
+    
+    func updateGridBasedOnConfiguration() {
+        if let configuration = configuration {
+            let newGrid = Grid(rows, cols) { position in
+                return configuration.positions.contains({ return position.row == $0.row && position.col == $0.col }) ? .Alive : .Empty
+            }
+            
+            grid = newGrid
+        }
+    }
+    
+    
     var grid: GridProtocol {
         didSet {
             if let delegate = delegate { delegate.engineDidUpdate(grid) }

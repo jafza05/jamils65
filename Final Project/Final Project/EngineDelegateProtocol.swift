@@ -8,7 +8,13 @@
 
 import Foundation
 
-protocol  EngineDelegate: class {
+protocol EngineDelegate: class {
     func engineDidUpdate(withGrid: GridProtocol)
-    //func engineDidUpdate(withConfig: [Configuration])
+    func engineDidUpdate(withConfigurations: Array<Configuration>)
+}
+
+extension EngineDelegate {
+    func engineDidUpdate(withConfigurations: Array<Configuration>) {
+        // empty default implementation
+    }
 }

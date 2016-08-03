@@ -25,6 +25,7 @@ class SimulationViewController2: UIViewController, EngineDelegate {
     
     override func viewDidAppear(animated: Bool) {
         gridView.setNeedsDisplay()
+        liveStats()
 
     }
 
@@ -50,19 +51,32 @@ class SimulationViewController2: UIViewController, EngineDelegate {
                 engine.grid.cells[h].state = .Empty
             }
         }
+        liveStats()
         gridView.setNeedsDisplay()
     }
     
     func iterate() {
-        print("Alive: \(engine.grid.alive)")
-        print("Born: \(engine.grid.born)")
-        print("Died: \(engine.grid.died)")
-        print("Empty: \(engine.grid.empty)")
-        let pctAlive = Float(engine.grid.alive / (engine.grid.cols*engine.grid.rows))*100
-        print("Pct Alive: \(pctAlive)")
         engine.step()
+        liveStats()
+
+
     }
     
+    func liveStats() {
+        let pctAlive = round(Double(engine.grid.alive)/Double(engine.grid.cells.count)*1000)/10
+        let pctBorn = round(Double(engine.grid.born)/Double(engine.grid.cells.count)*1000)/10
+        let pctDied = round(Double(engine.grid.died)/Double(engine.grid.cells.count)*1000)/10
+        let pctEmpty = round(Double(engine.grid.empty)/Double(engine.grid.cells.count)*1000)/10
+        livingPct.text = ("\(pctAlive)%")
+        bornPct.text = ("\(pctBorn)%")
+        diedPct.text = ("\(pctDied)%")
+        emptyPct.text = ("\(pctEmpty)%")
+    }
+    
+    @IBOutlet weak var bornPct: UILabel!
+    @IBOutlet weak var livingPct: UILabel!
+    @IBOutlet weak var diedPct: UILabel!
+    @IBOutlet weak var emptyPct: UILabel!
     
     func reset() {
         for h in 0..<engine.grid.cells.count {               //set all cells to empty
@@ -73,6 +87,7 @@ class SimulationViewController2: UIViewController, EngineDelegate {
         
         print("Reset")
         gridView.setNeedsDisplay()
+        liveStats()
     }
     
 
@@ -106,9 +121,7 @@ class SimulationViewController2: UIViewController, EngineDelegate {
     
     
     @IBAction func stepButtonPressed(sender: AnyObject) {
-
-        engine.step()
-        
+        iterate()
     }
     
 

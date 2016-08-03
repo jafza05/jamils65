@@ -8,11 +8,21 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController {
+class StatisticsViewController: UIViewController, EngineDelegate {
 
+    let engine = StandardEngine.sharedInstance
+    
+    @IBOutlet weak var gridView: GridView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        engine.delegate = self
+        
+    }
+    
+    func engineDidUpdate(withGrid: GridProtocol) {
+        gridView.setNeedsDisplay()
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +30,9 @@ class StatisticsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+//    let countAlive = engine.grid.alive
+//    let countBorn = engine.grid.born
+//    let countDied = engine.grid.died
+//    let countEmpty = engine.grid.empty
 }
 

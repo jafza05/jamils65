@@ -55,7 +55,7 @@ class InstrumentationViewController: UIViewController {
     
     @IBAction func freqSlider(sender: AnyObject) {
         freqLabel.text = ("\(round(freqSliderOutlet.value*10)/10) hz")
-        engine.refreshRate = Double(1/(round(freqSliderOutlet.value*10)/10))
+        engine.refreshRate = Double((round(freqSliderOutlet.value*10)/10))
     }
 
     @IBAction func loadJSON(sender: AnyObject) {

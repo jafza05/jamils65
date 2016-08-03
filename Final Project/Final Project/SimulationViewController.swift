@@ -83,7 +83,7 @@ class SimulationViewController: UIViewController, EngineDelegate {
     
     @IBAction func btnStart(sender: UIButton) {
         engine.refreshTimer?.invalidate()
-        engine.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(engine.refreshRate, target:
+        engine.refreshTimer = NSTimer.scheduledTimerWithTimeInterval((1/engine.refreshRate), target:
                                                                 self, selector: #selector(iterate), userInfo: nil, repeats: true)
         print("timer started")
     }

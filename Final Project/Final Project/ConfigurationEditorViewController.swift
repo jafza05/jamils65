@@ -21,10 +21,17 @@ class ConfigurationEditorViewController: UIViewController {
     var engine = StandardEngine.sharedInstance
     
     func newGridSizer() -> Int {
+        
+        if presetPoints.count == 0 {
+            return max(engine.cols, engine.rows)
+        }
+        
+        else {
         let pointMax = presetPoints.map({ $0.maxElement()!}).maxElement()!
         let newGridDim = Int(floor(Double(pointMax) * 1.5))
         //print(newGridDim)
         return newGridDim
+        }
     }
     
     var cols: Int {

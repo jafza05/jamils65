@@ -60,8 +60,7 @@ class SimulationViewController2: UIViewController, EngineDelegate {
         for h in 0..<engine.grid.cells.count {               //set all cells to empty
             engine.grid.cells[h].state = .Empty
         }
-    
-        
+
         //engine.grid.cells = cellStates.grid.map { _ in .Empty }
         
         print("Reset")
@@ -72,7 +71,7 @@ class SimulationViewController2: UIViewController, EngineDelegate {
     
     @IBAction func btnStart(sender: UIButton) {
         engine.refreshTimer?.invalidate()
-        engine.refreshTimer = NSTimer.scheduledTimerWithTimeInterval(engine.refreshRate, target:
+        engine.refreshTimer = NSTimer.scheduledTimerWithTimeInterval((1/engine.refreshRate), target:
             self, selector: #selector(iterate), userInfo: nil, repeats: true)
         print("timer started")
     }

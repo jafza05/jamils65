@@ -92,6 +92,15 @@ class ConfigurationViewController: UITableViewController {
 
     }
     
+    @IBAction func addConfiguration(sender: AnyObject) {
+        names.append("New Preset")
+        presetPos.append([])
+        let itemRow = names.count - 1
+        let itemPath = NSIndexPath(forRow:itemRow, inSection: 0)
+        tableView.insertRowsAtIndexPaths([itemPath], withRowAnimation: .Automatic)
+    }
+    
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -123,8 +132,6 @@ class ConfigurationViewController: UITableViewController {
                                              withRowAnimation: .Automatic)
         }
     }
-
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let editingRow = (sender as! UITableViewCell).tag

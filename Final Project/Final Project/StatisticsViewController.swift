@@ -25,10 +25,10 @@ class StatisticsViewController: UIViewController, EngineDelegate {
         gridView.setNeedsDisplay()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+//    }
 
 //    let countAlive = engine.grid.alive
 //    let countBorn = engine.grid.born

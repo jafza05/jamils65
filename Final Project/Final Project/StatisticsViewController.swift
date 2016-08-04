@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StatisticsViewController: UIViewController, EngineDelegate {
+class StatisticsViewController: UIViewController {
 
     let engine = StandardEngine.sharedInstance
     
@@ -17,13 +17,13 @@ class StatisticsViewController: UIViewController, EngineDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        engine.delegate = self
+//        engine.delegate = self
         
     }
     
-    func engineDidUpdate(withGrid: GridProtocol) {
-        gridView.setNeedsDisplay()
-    }
+//    func engineDidUpdate(withGrid: GridProtocol) {
+//        gridView.setNeedsDisplay()
+//    }
 
 //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
